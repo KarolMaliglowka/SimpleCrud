@@ -8,6 +8,9 @@ internal sealed class PhoneBookConfiguration : IEntityTypeConfiguration<PhoneBoo
 {
     public void Configure(EntityTypeBuilder<PhoneBook> builder)
     {
-        builder.
+        builder.Property(x => x.Id);
+        builder.Property(x => x.PhoneNumber);
+        builder.Property(x => x.FirstName);
+        builder.Property(x => x.LastName);
     }
 }
