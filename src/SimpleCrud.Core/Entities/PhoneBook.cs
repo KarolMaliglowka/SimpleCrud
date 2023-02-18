@@ -1,8 +1,10 @@
-﻿namespace SimpleCrud.Core.Entities;
+﻿using SimpleCrud.Core.ValueObjects;
+
+namespace SimpleCrud.Core.Entities;
 
 public class PhoneBook
 {
-    public Guid Id { get; set; }
+    public Id Id { get; set; }
     public string? PhoneNumber { get; set; }
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
