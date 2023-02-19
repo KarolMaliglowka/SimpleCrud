@@ -1,3 +1,5 @@
+using SimpleCrud.Core.Exceptions;
+
 namespace SimpleCrud.Core.ValueObjects;
 
 public readonly struct Id
@@ -6,6 +8,11 @@ public readonly struct Id
 
     private Id(Guid value)
     {
+        if (value == Guid.Empty) 
+        {
+            throw new InvalidEntityIdException(value);
+        }
+
         Value = value;
     }
 
