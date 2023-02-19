@@ -4,11 +4,11 @@ namespace SimpleCrud.Core.ValueObjects;
 
 public readonly struct Id
 {
-    private Guid Value { get;}
+    private Guid Value { get; }
 
     private Id(Guid value)
     {
-        if (value == Guid.Empty) 
+        if (value == Guid.Empty)
         {
             throw new InvalidEntityIdException(value);
         }
@@ -16,6 +16,11 @@ public readonly struct Id
         Value = value;
     }
 
-    public static implicit operator Guid(Id id) => id.Value;
-    public static implicit operator Id(Guid value) => new(value);
+    public static implicit operator Guid(Id date)
+        => date.Value;
+
+    public static implicit operator Id(Guid value)
+        => new(value);
+
+    public override string ToString() => Value.ToString("N");
 }
