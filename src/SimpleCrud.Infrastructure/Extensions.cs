@@ -45,8 +45,6 @@ public static class Extensions
             reDoc.SpecUrl("/swagger/v1/swagger.json");
             reDoc.DocumentTitle = "MySpot API";
         });
-        //app.UseAuthentication();
-        //app.UseAuthorization();
         app.MapControllers();
 
         return app;

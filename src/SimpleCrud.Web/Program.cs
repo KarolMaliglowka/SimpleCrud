@@ -13,7 +13,5 @@ builder.Services
 
 var app = builder.Build();
 
-// app.MapGet("/", () => Ok(await que));
-
 app.UseInfrastructure();
 app.Run();

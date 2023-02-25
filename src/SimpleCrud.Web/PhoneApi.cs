@@ -10,7 +10,7 @@ public static class PhoneApi
 
     public static WebApplication UsePhoneApi(this WebApplication app)
     {
-        app.MapGet("api/phones/me",
+        app.MapGet("api/phones/",
             async (HttpContext context, IQueryHandler<GetPhonesNumbers, IEnumerable<PhoneDto>> handler) =>
             {
                 var phoneDto = await handler.HandleAsync(new GetPhonesNumbers());
