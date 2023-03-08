@@ -6,7 +6,7 @@ public interface IPhoneBookRepository
 {
     public IQueryable<PhoneBook> Query();
     Task<PhoneBook> GetAsyncById(Guid id);
-    Task AddAsync(PhoneBook weeklyParkingSpot);
-    Task UpdateAsync(PhoneBook weeklyParkingSpot);
-    Task Remove(PhoneBook weeklyParkingSpot);
+    Task AddAsync(PhoneBook phoneBook);
+    Task UpdateAsync(PhoneBook phoneBook);
+    Task Remove(PhoneBook phoneBook);
 }
