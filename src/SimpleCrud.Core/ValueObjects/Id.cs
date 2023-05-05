@@ -2,11 +2,11 @@ using SimpleCrud.Core.Exceptions;
 
 namespace SimpleCrud.Core.ValueObjects;
 
-public readonly struct Id
+public sealed record Id
 {
-    private Guid Value { get; }
+    public Guid Value { get; }
 
-    private Id(Guid value)
+    public Id(Guid value)
     {
         if (value == Guid.Empty)
         {

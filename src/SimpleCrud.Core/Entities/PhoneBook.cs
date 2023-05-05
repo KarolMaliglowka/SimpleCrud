@@ -8,7 +8,7 @@ public class PhoneBook
     public PhoneNumber PhoneNumber { get; set; }
     public Name Name { get; set; }
 
-    public PhoneBook(string phoneNumber, string name)
+    public PhoneBook(PhoneNumber phoneNumber, Name name)
     {
         Id = Guid.NewGuid();
         SetPhoneNumber(phoneNumber);

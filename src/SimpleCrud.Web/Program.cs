@@ -1,17 +1,17 @@
-using Microsoft.AspNetCore.Http.HttpResults;
-using SimpleCrud.Application;
-using SimpleCrud.Core;
 using SimpleCrud.Infrastructure;
-using Microsoft.Extensions.Options;
+using SimpleCrud.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services
-    .AddCore()
-    .AddApplication()
-    .AddInfrastructure(builder.Configuration);
+builder.Services.AddInfrastructure();
 
-var app = builder.Build();
+var app = builder
+    .Build()
+    .UsePhoneApi();
 
-app.UseInfrastructure();
+
+// app.MapControllerRoute(
+//     name: "default",
+//     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.Run();

@@ -7,7 +7,7 @@ public partial record PhoneNumber
 {
     private static readonly Regex Regex = MyRegex();
 
-    private string Value { get; }
+    public string Value { get; }
 
     public PhoneNumber(string value)
     {
