@@ -1,6 +1,4 @@
-﻿using SimpleCrud.Application.Abstractions;
-using SimpleCrud.Application.Dtos;
-using SimpleCrud.Application.Queries;
+﻿using SimpleCrud.Core.Repositories;
 
 namespace SimpleCrud.Web;
 
@@ -8,15 +6,20 @@ public static class PhoneApi
 {
     public static WebApplication UsePhoneApi(this WebApplication app)
     {
-        // app
-        //     .MapGet("api/phones/",
-        //     async (IQueryHandler<GetPhonesNumbers, IEnumerable<PhoneDto>> handler) =>
-        //     {
-        //         var phoneDto = await handler.HandleAsync(new GetPhonesNumbers());
-        //         return Results.Ok(phoneDto);
-        //     });
-
-        app.MapGet("api/phones1/", () => "hello world");
+        app
+            .MapGet("api/phones/",
+                async (IPhoneBookRepository phoneBookRepository) =>
+                {
+                    var results = await phoneBookRepository.GetAllAsync();
+                    return Results.Ok(results);
+                });
+        app
+            .MapGet("api/phones/{id:guid}",
+            async (IPhoneBookRepository phoneBookRepository, Guid id) =>
+            {
+                var results = await phoneBookRepository.GetAsyncById(id);
+                return Results.Ok(results);
+            });
 
         return app;
     }

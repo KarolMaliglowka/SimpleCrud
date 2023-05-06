@@ -15,7 +15,7 @@ public class GetPhonesNumbersHandler : IQueryHandler<GetPhonesNumbers, IEnumerab
     public GetPhonesNumbersHandler(IPhoneBookRepository phoneBookRepository) =>
         _phoneBookRepository = phoneBookRepository;
 
-    public Task<IEnumerable<PhoneDto>?> HandleAsync(GetPhonesNumbers query)
+    public Task<IEnumerable<PhoneDto>> HandleAsync(GetPhonesNumbers query)
     {
         return Task.FromResult<IEnumerable<PhoneDto>>
         (

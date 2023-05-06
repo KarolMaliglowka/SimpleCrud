@@ -21,11 +21,11 @@ public partial record PhoneNumber
             throw new InvalidPhoneNumberException(value);
         }
 
-        value = value.ToLowerInvariant();
-        if (!Regex.IsMatch(value))
-        {
-            throw new InvalidPhoneNumberException(value);
-        }
+        // value = value.ToLowerInvariant();
+        // if (!Regex.IsMatch(value))
+        // {
+        //     throw new InvalidPhoneNumberException(value);
+        // }
 
         Value = value;
     }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SimpleCrud.Application.Dtos;
 using SimpleCrud.Core.Entities;
 using SimpleCrud.Core.Repositories;
 using SimpleCrud.Core.ValueObjects;
@@ -12,6 +13,13 @@ public class PhoneBookRepository : IPhoneBookRepository
     public PhoneBookRepository(SimpleCrudDbContext dbContext) => _dbContext = dbContext;
 
     public IQueryable<PhoneBook> Query() => _dbContext.PhonesBooks.AsNoTracking();
+
+    public async Task<IEnumerable<PhoneBook>> GetAllAsync()
+    {
+        return await _dbContext.PhonesBooks.
+            OrderBy(x => x.Name)
+            .ToListAsync();
+    }
 
     public async Task<PhoneBook> GetAsyncById(Id id) =>
         await _dbContext.PhonesBooks.FirstAsync(pb => pb.Id == id);
