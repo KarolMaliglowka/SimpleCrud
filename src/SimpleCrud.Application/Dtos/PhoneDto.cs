@@ -1,10 +1,8 @@
-﻿using SimpleCrud.Core.ValueObjects;
-
-namespace SimpleCrud.Application.Dtos;
+﻿namespace SimpleCrud.Application.Dtos;
 
 public record PhoneDto
 (
-    Id Id,
-    Name Name,
-    PhoneNumber PhoneNumber
+    Guid Id,
+    string Name,
+    string PhoneNumber
 );
