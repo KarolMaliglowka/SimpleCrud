@@ -34,9 +34,9 @@ public class PhoneBookRepository : IPhoneBookRepository
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task Remove(PhoneBook phoneBook)
+    public async Task Remove(Guid phoneBookId)
     {
-        _dbContext.PhonesBooks.Remove(phoneBook);
-        await _dbContext.SaveChangesAsync();
+        _dbContext.PhonesBooks.Remove(await GetAsyncById(phoneBookId));
+         await _dbContext.SaveChangesAsync();
     }
 }
