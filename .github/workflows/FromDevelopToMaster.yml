@@ -14,4 +14,4 @@ jobs:
           type: now
           from_branch: develop
           target_branch: master
-          github_token: ${{ secrets.TESTOWANIETOKENA }}
+          github_token: ${{ secrets.SIMPLECRUDTOKEN }}
