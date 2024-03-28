@@ -1,9 +1,8 @@
 # SimpleCrud
 Simple crud application, backend in dotnet, fronted in Angular with PrimeNG
 
----
 
-- [About](#About)
+- [About](#about)
 - [Solution structure](#solution-structure)
   - [Core layer](#core-layer)
   - [Infrastructure layer](#infrastructure-layer)
@@ -17,7 +16,6 @@ Simple crud application, backend in dotnet, fronted in Angular with PrimeNG
 
 **The Simple Crud** is an application .
 
----
 
 ## Solution structure
 
@@ -37,8 +35,6 @@ tbd
 
 tbd
 
----
-
 ## Tests
 
 tbd
@@ -46,8 +42,6 @@ tbd
 ### Unit tests
 
 tbd
-
----
 
 ## Work with application
 
