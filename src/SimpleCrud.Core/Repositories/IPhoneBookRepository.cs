@@ -10,4 +10,5 @@ public interface IPhoneBookRepository
     Task AddAsync(PhoneBook phoneBook);
     Task UpdateAsync(PhoneBook phoneBook);
     Task Remove(PhoneBook phoneBook);
+    Task<PhoneBook> GetAsyncByPhoneNumber(string phoneNumber);
 }

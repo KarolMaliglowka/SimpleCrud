@@ -39,4 +39,7 @@ public class PhoneBookRepository : IPhoneBookRepository
         _dbContext.PhonesBooks.Remove(phoneBook);
         await _dbContext.SaveChangesAsync();
     }
+    
+    public async Task<PhoneBook> GetAsyncByPhoneNumber(string phoneNumber) => 
+        await _dbContext.PhonesBooks.FirstAsync(pb => pb.PhoneNumber == phoneNumber);
 }
