@@ -1,4 +1,4 @@
-﻿using SimpleCrud.Application.Abstractions;
+﻿using SimpleCrud.Application.Abstractions.Queries;
 using SimpleCrud.Application.Dtos;
 using SimpleCrud.Core.Repositories;
 

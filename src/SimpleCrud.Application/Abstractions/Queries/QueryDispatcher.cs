@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace SimpleCrud.Application.Abstractions;
+namespace SimpleCrud.Application.Abstractions.Queries;
 
 internal sealed class QueryDispatcher(IServiceProvider serviceProvider) : IQueryDispatcher
 {

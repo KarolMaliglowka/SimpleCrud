@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SimpleCrud.Application.Abstractions;
+using SimpleCrud.Application.Abstractions.Commands;
 
 namespace SimpleCrud.Application;
 

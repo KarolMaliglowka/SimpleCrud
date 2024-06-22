@@ -1,4 +1,4 @@
-namespace SimpleCrud.Application.Abstractions;
+namespace SimpleCrud.Application.Abstractions.Queries;
 
 public interface IQueryDispatcher
 {

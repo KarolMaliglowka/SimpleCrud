@@ -5,6 +5,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Abstractions\Dispachers\" />
     <Folder Include="Commands" />
     <Folder Include="Repositories\" />
   </ItemGroup>
