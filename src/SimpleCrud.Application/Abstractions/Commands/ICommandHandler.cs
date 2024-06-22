@@ -1,4 +1,4 @@
-﻿namespace SimpleCrud.Application.Abstractions;
+﻿namespace SimpleCrud.Application.Abstractions.Commands;
 
 public interface ICommandHandler<in TCommand> where TCommand : class, ICommand
 {
