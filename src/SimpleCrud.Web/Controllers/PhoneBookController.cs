@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using SimpleCrud.Application.Abstractions.Dispatchers;
 using SimpleCrud.Application.Dtos;
+using SimpleCrud.Application.Queries;
 using SimpleCrud.Core.Entities;
 using SimpleCrud.Core.Repositories;
 
@@ -7,25 +9,21 @@ namespace SimpleCrud.Web.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class PhoneBookController : ControllerBase
+public class PhoneBookController(IPhoneBookRepository phoneBookRepository, IDispatcher dispatcher)
+    : ControllerBase
 {
-    public readonly IPhoneBookRepository PhoneBookRepository;
-
-    public PhoneBookController(IPhoneBookRepository phoneBookRepository)
-    {
-        PhoneBookRepository = phoneBookRepository;
-    }
-
     [HttpGet]   
-    public async Task<ActionResult<IEnumerable<PhoneDto>>> GetAll()
+    public async Task<ActionResult<List<PhoneDto>>> GetAll()
     {
-        return null;
+        var test = await dispatcher.QueryAsync(new GetPhonesNumbers());
+        return Ok(test);
     }
     
     [HttpGet("getById/{phoneId:guid}")]
     public async Task<ActionResult<PhoneDto>> GetById(Guid phoneId)
     {
-        var phone = await PhoneBookRepository.GetAsyncById(phoneId);
+        
+        var phone = await phoneBookRepository.GetAsyncById(phoneId);
         return new PhoneDto(phone.Id, phone.Name, phone.PhoneNumber);
     }
     
@@ -33,32 +31,32 @@ public class PhoneBookController : ControllerBase
     public async Task<ActionResult> Create([FromBody] PhoneDto command)
     {
         var newPhone = new PhoneBook(command.PhoneNumber, command.Name);
-        await PhoneBookRepository.AddAsync(newPhone);
+        await phoneBookRepository.AddAsync(newPhone);
         return Ok();
     }
     
     [HttpPut("update/{phoneId:guid}")]
     public async Task<ActionResult<PhoneDto>> Edit(Guid phoneId, [FromBody] PhoneDto command)
     {
-        var phone = await PhoneBookRepository.GetAsyncById(phoneId);
+        var phone = await phoneBookRepository.GetAsyncById(phoneId);
         phone.PhoneNumber = command.PhoneNumber;
         phone.Name = command.PhoneNumber;
-        await PhoneBookRepository.UpdateAsync(phone);
+        await phoneBookRepository.UpdateAsync(phone);
         return Ok();
     }
     
     [HttpDelete("delete/{phoneId:guid}")]
     public async Task<ActionResult> Delete(Guid phoneId)
     {
-        var phone = await PhoneBookRepository.GetAsyncById(phoneId);
-        await PhoneBookRepository.Remove(phone);
+        var phone = await phoneBookRepository.GetAsyncById(phoneId);
+        await phoneBookRepository.Remove(phone);
         return Ok();
     }
     
     [HttpGet("getByPhoneNumber/{phoneNumber}")]
     public async Task<ActionResult<PhoneDto>> GetByPhoneNumber(string phoneNumber)
     {
-        var phone = await PhoneBookRepository.GetAsyncByPhoneNumber(phoneNumber);
+        var phone = await phoneBookRepository.GetAsyncByPhoneNumber(phoneNumber);
         return new PhoneDto(phone.Id, phone.Name, phone.PhoneNumber);
     }
 }

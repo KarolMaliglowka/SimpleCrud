@@ -1,9 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using SimpleCrud.Application.Attributes;
 using SimpleCrud.Core.Entities;
 using SimpleCrud.Core.Repositories;
 
 namespace SimpleCrud.Infrastructure.DAL.Repositories;
 
+[Injectable(ServiceLifetime.Scoped)]
 public class PhoneBookRepository : IPhoneBookRepository
 {
     private readonly SimpleCrudDbContext _dbContext;
