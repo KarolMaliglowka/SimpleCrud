@@ -1,4 +1,6 @@
-﻿using SimpleCrud.Application.Abstractions.Queries;
+﻿using Microsoft.Extensions.DependencyInjection;
+using SimpleCrud.Application.Abstractions.Queries;
+using SimpleCrud.Application.Attributes;
 using SimpleCrud.Application.Dtos;
 using SimpleCrud.Core.Repositories;
 
@@ -9,6 +11,7 @@ public class GetPositionByNumber : IQuery<PhoneDto>
     public string PhoneNumebr { get; set; }
 }
 
+[Injectable(ServiceLifetime.Scoped)]
 public class GetPositionByNumberHandler : IQueryHandler<GetPositionByNumber, PhoneDto>
 {
     private readonly IPhoneBookRepository _phoneBookRepository;
