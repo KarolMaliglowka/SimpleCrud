@@ -1,8 +1,8 @@
 ﻿namespace SimpleCrud.Application.Dtos;
 
 public record PhoneDto
-(
-    Guid Id,
-    string Name,
-    string PhoneNumber
-);
+{
+    public Guid Id { get; set; }
+    public string? Name { get; set; }
+    public string? PhoneNumber { get; set; }
+};
