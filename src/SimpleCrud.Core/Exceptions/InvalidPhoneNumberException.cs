@@ -2,7 +2,7 @@
 
 public class InvalidPhoneNumberException : CustomException
 {
-    public InvalidPhoneNumberException() : base($"Phone number is invalid.")
+    public InvalidPhoneNumberException() : base("Phone number is invalid.")
     {
     }
 }

@@ -3,7 +3,7 @@
 public class InvalidEntityIdException : CustomException
 {
 
-    public InvalidEntityIdException() : base($"Id is invalid.")
+    public InvalidEntityIdException() : base("Id is invalid.")
     {
     }
 }
