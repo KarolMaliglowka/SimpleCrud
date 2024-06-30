@@ -38,19 +38,19 @@ public class PhoneBookController(IPhoneBookRepository phoneBookRepository) : Con
     {
         var newPhone = new PhoneBook(command.PhoneNumber, command.Name);
         await phoneBookRepository.AddAsync(newPhone);
-        return Created( "", newPhone.Id.ToString());
+        return Created();
     }
 
-    [HttpPut("update/{phoneId:guid}")]
-    public async Task<ActionResult<PhoneDto>> Edit(Guid phoneId, [FromBody] PhoneDto command)
+    [HttpPut("update")]
+    public async Task<ActionResult<PhoneDto>> Edit([FromBody] PhoneDto command)
     {
-        var phone = await phoneBookRepository.GetAsyncById(phoneId);
+        var phone = await phoneBookRepository.GetAsyncById(command.Id);
         if (phone == null)
         {
             throw new NullReferenceException("No record");
         }
         phone.PhoneNumber = command.PhoneNumber;
-        phone.Name = command.PhoneNumber;
+        phone.Name = command.Name;
         await phoneBookRepository.UpdateAsync(phone);
         return Ok();
     }
