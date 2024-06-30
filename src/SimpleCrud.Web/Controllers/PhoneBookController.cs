@@ -50,7 +50,7 @@ public class PhoneBookController(IPhoneBookRepository phoneBookRepository) : Con
             throw new NullReferenceException("No record");
         }
         phone.PhoneNumber = command.PhoneNumber;
-        phone.Name = command.PhoneNumber;
+        phone.Name = command.Name;
         await phoneBookRepository.UpdateAsync(phone);
         return Ok();
     }
