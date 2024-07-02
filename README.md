@@ -1,4 +1,5 @@
 # SimpleCrud
+
 Simple crud application, backend in dotnet, fronted in Angular with PrimeNG
 
 
@@ -37,11 +38,9 @@ tbd
 
 ## Tests
 
-tbd
-
 ### Unit tests
 
-tbd
+Tests for the PhoneBook model are added, using [NUnit](https://nunit.org/) and [Fluent Assertions](https://fluentassertions.com/)
 
 ## Work with application
 
