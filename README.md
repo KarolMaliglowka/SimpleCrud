@@ -8,7 +8,7 @@ Simple crud application, backend in dotnet, fronted in Angular with PrimeNG
   - [Core layer](#core-layer)
   - [Infrastructure layer](#infrastructure-layer)
   - [Application layer](#application-layer)
-  - [Web layer](#webapp-layer)
+  - [Web layer](#web-layer)
 - [Tests](#tests)
   - [Unit tests](#unit-tests) 
 - [Work with application](#work-with-application)
@@ -32,7 +32,7 @@ tbd
 
 tbd
 
-### WebApp Layer
+### Web Layer
 
 tbd
 
