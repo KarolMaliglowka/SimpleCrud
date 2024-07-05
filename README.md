@@ -22,7 +22,7 @@ Simple crud application, backend in dotnet, fronted in Angular with PrimeNG
 
 ### Core Layer
 
-tbd
+Database model with a phone list table is included.
 
 ### Infrastructure Layer
 
