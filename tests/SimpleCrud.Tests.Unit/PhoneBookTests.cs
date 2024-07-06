@@ -42,10 +42,10 @@ public class PhoneBookTests
     {
         //arrange
         const string phoneNumber = "ExamplePhoneNumber";
-        PhoneBook? phoneBook = null;
+        //PhoneBook? phoneBook = null;
 
         //act
-        Action act = () => phoneBook = new PhoneBook(phoneNumber, name);
+        Action act = () => new PhoneBook(phoneNumber, name);
 
         //assert
         act
