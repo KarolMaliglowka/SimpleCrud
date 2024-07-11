@@ -9,19 +9,19 @@ import {DropdownModule} from "primeng/dropdown";
 import {ToastModule} from "primeng/toast";
 import {ToolbarModule} from "primeng/toolbar";
 import {FileUploadModule} from "primeng/fileupload";
-import {Phone} from "../domain/phone";
 import {TableModule} from "primeng/table";
+import {Phone} from "../../domain/phone";
 
 @Component({
-    selector: 'app-phones-list',
+    selector: 'app-phone-book-list',
     standalone: true,
-    templateUrl: './phones-list.component.html',
+    templateUrl: './phone-book-list.component.html',
     imports: [
         TableModule
     ],
-    styleUrl: './phones-list.component.scss'
+    styleUrl: './phone-book-list.component.scss'
 })
-export class PhonesListComponent implements OnInit {
+export class PhoneBookListComponent implements OnInit {
 
     phoneDialog: boolean = false;
     phones!: Phone[];

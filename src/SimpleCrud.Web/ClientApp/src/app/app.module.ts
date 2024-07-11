@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppLayoutModule } from './layout/app.layout.module';
-import {PhonesListComponent} from "./phones-list/phones-list.component";
+import {PhoneBookListComponent} from "./phone-book/phone-book-list/phone-book-list.component";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {InputNumberModule} from "primeng/inputnumber";
 import {FormsModule} from "@angular/forms";
@@ -18,7 +18,6 @@ import {TableModule} from "primeng/table";
 @NgModule({
     declarations: [
         AppComponent,
-        //NotfoundComponent
     ],
     imports: [AppRoutingModule, AppLayoutModule,
         ConfirmDialogModule,
@@ -43,11 +42,9 @@ import {TableModule} from "primeng/table";
         ToolbarModule,
         FileUploadModule,
         TableModule
-
-
     ],
     providers: [
-        PhonesListComponent
+        PhoneBookListComponent
     ],
     bootstrap: [AppComponent],
 })
