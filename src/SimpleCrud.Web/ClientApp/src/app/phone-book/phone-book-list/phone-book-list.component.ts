@@ -36,23 +36,9 @@ export class PhoneBookListComponent implements OnInit {
         throw new Error('Method not implemented.');
     }
 
-
     openNew() {
         this.phone = {};
         this.submitted = false;
         this.phoneDialog = true;
-    }
-
-    deleteSelectedProducts() {
-        // this.confirmationService.confirm({
-        //     message: 'Are you sure you want to delete the selected products?',
-        //     header: 'Confirm',
-        //     icon: 'pi pi-exclamation-triangle',
-        //     accept: () => {
-        //         this.products = this.products.filter((val) => !this.selectedProducts?.includes(val));
-        //         this.selectedProducts = null;
-        //         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
-        //     }
-        //});
     }
 }
