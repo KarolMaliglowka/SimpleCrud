@@ -11,7 +11,7 @@ public class PhoneBookTests
     {
         //arrange
         const string name = "ExampleName";
-        const string phoneNumber = "ExamplePhoneNumber";
+        const string phoneNumber = "000000000";
         PhoneBook? phoneBook = null;
 
         //act
