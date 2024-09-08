@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace SimpleCrud.Infrastructure.DAL;
 
-internal static class Extension
+internal static class DependencyInjection
 {
     public static IServiceCollection AddPostgres(this IServiceCollection services)
     {
