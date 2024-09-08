@@ -5,7 +5,7 @@ using SimpleCrud.Infrastructure.DAL.Repositories;
 
 namespace SimpleCrud.Infrastructure;
 
-public static class Extensions
+public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {

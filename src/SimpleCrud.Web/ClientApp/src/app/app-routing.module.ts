@@ -1,12 +1,12 @@
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import {PhonesListComponent} from "./phones-list/phones-list.component";
+import {PhoneBookListComponent} from "./phone-book/phone-book-list/phone-book-list.component";
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
             {
-                path: '', component: PhonesListComponent
+                path: '', component: PhoneBookListComponent
             },
             //{ path: 'notfound', component: NotfoundComponent },
             { path: '**', redirectTo: '/notfound' },

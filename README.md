@@ -1,14 +1,15 @@
-# SimpleCrud
+SimpleCrud
+========================
+
 Simple crud application, backend in dotnet, fronted in Angular with PrimeNG
 
----
 
-- [About](#About)
+- [About](#about)
 - [Solution structure](#solution-structure)
   - [Core layer](#core-layer)
   - [Infrastructure layer](#infrastructure-layer)
   - [Application layer](#application-layer)
-  - [Web layer](#webapp-layer)
+  - [Web layer](#web-layer)
 - [Tests](#tests)
   - [Unit tests](#unit-tests) 
 - [Work with application](#work-with-application)
@@ -17,13 +18,12 @@ Simple crud application, backend in dotnet, fronted in Angular with PrimeNG
 
 **The Simple Crud** is an application .
 
----
 
 ## Solution structure
 
 ### Core Layer
 
-tbd
+Database model with a phone list table is included.
 
 ### Infrastructure Layer
 
@@ -33,21 +33,16 @@ tbd
 
 tbd
 
-### WebApp Layer
+### Web Layer
 
 tbd
 
----
 
 ## Tests
 
-tbd
-
 ### Unit tests
 
-tbd
-
----
+Tests for the PhoneBook model are added, using [NUnit](https://nunit.org/) and [Fluent Assertions](https://fluentassertions.com/)
 
 ## Work with application
 
