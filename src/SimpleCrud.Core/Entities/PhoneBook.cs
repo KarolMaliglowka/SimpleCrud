@@ -31,7 +31,8 @@ public partial class PhoneBook
         {
             throw new ArgumentException("Phone number cannot be more than 20 characters.", nameof(phoneNumber));
         }
-        if (!MyRegex1().IsMatch(phoneNumber))
+
+        if (!PhoneNumberFormatRegex().IsMatch(phoneNumber))
         {
             throw new ArgumentException("Invalid phone number format.", nameof(phoneNumber));
         }
@@ -45,13 +46,11 @@ public partial class PhoneBook
         {
             throw new ArgumentNullException(nameof(name), "Name cannot be empty.");
         }
-
         if (name.Length > 100)
         {
             throw new ArgumentException("Name cannot be more than 100 characters.", nameof(name));
         }
-
-        if (!MyRegex().IsMatch(name))
+        if (!PhoneNameFormatRegex().IsMatch(name))
         {
             throw new ArgumentException("Name can only contain letters and spaces.", nameof(name));
         }
@@ -60,7 +59,8 @@ public partial class PhoneBook
     }
 
     [GeneratedRegex(@"^[a-zA-Z\s]+$")]
-    private static partial Regex MyRegex();
+    private static partial Regex PhoneNameFormatRegex();
+
     [GeneratedRegex(@"^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d$")]
-    private static partial Regex MyRegex1();
+    private static partial Regex PhoneNumberFormatRegex();
 }
