@@ -27,9 +27,9 @@ public partial class PhoneBook
             throw new ArgumentNullException(nameof(phoneNumber), "Phone number cannot be empty.");
         }
 
-        if (phoneNumber.Length > 20)
+        if (phoneNumber.Length > 15)
         {
-            throw new ArgumentException("Phone number cannot be more than 20 characters.", nameof(phoneNumber));
+            throw new ArgumentException("Phone number cannot be more than 15 characters.", nameof(phoneNumber));
         }
 
         if (!PhoneNumberFormatRegex().IsMatch(phoneNumber))

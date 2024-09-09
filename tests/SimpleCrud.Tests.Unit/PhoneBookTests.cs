@@ -41,8 +41,7 @@ public class PhoneBookTests
     public void GivenIncorrectName_WhenCreatingPhoneBook_ThenThrowError(string name)
     {
         //arrange
-        const string phoneNumber = "ExamplePhoneNumber";
-        //PhoneBook? phoneBook = null;
+        const string phoneNumber = "000000000";
 
         //act
         Action act = () => new PhoneBook(phoneNumber, name);
@@ -50,7 +49,8 @@ public class PhoneBookTests
         //assert
         act
             .Should()
-            .NotThrow<NullReferenceException>();
+            .Throw<ArgumentNullException>()
+            .WithMessage("*cannot be empty*");
     }
 
     [Test]
@@ -61,14 +61,48 @@ public class PhoneBookTests
     {
         //arrange
         const string name = "ExampleName";
-        PhoneBook? phoneBook = null;
 
         //act
-        Action act = () => phoneBook = new PhoneBook(phoneNumber, name);
+        Action act = () => new PhoneBook(phoneNumber, name);
 
         //assert
         act
             .Should()
-            .NotThrow<NullReferenceException>();
+            .Throw<ArgumentNullException>()
+            .WithMessage("*cannot be empty*");
+    }
+
+    [Test]
+    [TestCase("12345678910111213")]
+    public void GivenLongerPhoneNumber_WhenCreatingPhoneBook_ThenThrowError(string phoneNumber)
+    {
+        //arrange
+        const string name = "ExampleName";
+
+        //act
+        Action act = () => new PhoneBook(phoneNumber, name);
+
+        //assert
+        act
+            .Should()
+            .Throw<ArgumentException>()
+            .WithMessage("*cannot be more than 15*");
+    }
+
+    [Test]
+    public void GivenLongerName_WhenCreatingPhoneBook_ThenThrowError()
+    {
+        //arrange
+        const string phoneNumber = "000000000";
+        var name = new string('*', 200);
+
+        //act
+        Action act = () => new PhoneBook(phoneNumber, name);
+
+        //assert
+        act
+            .Should()
+            .Throw<ArgumentException>()
+            .WithMessage("*cannot be more than 100*");
     }
 }
