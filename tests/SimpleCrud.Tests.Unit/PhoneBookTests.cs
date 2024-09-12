@@ -105,7 +105,7 @@ public class PhoneBookTests
             .Throw<ArgumentException>()
             .WithMessage("*cannot be more than 100*");
     }
-    
+
     [Test]
     public void GivenWrongPhoneNumber_WhenCreatingPhoneBook_ThenThrowError()
     {
@@ -122,7 +122,7 @@ public class PhoneBookTests
             .Throw<ArgumentException>()
             .WithMessage("*phone number format*");
     }
-    
+
     [Test]
     public void GivenWrongName_WhenCreatingPhoneBook_ThenThrowError()
     {
