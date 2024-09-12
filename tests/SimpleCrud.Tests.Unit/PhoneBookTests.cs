@@ -105,4 +105,38 @@ public class PhoneBookTests
             .Throw<ArgumentException>()
             .WithMessage("*cannot be more than 100*");
     }
+    
+    [Test]
+    public void GivenWrongPhoneNumber_WhenCreatingPhoneBook_ThenThrowError()
+    {
+        //arrange
+        const string phoneNumber = "aa000000";
+        var name = new string('*', 200);
+
+        //act
+        Action act = () => new PhoneBook(phoneNumber, name);
+
+        //assert
+        act
+            .Should()
+            .Throw<ArgumentException>()
+            .WithMessage("*phone number format*");
+    }
+    
+    [Test]
+    public void GivenWrongName_WhenCreatingPhoneBook_ThenThrowError()
+    {
+        //arrange
+        const string phoneNumber = "000000000";
+        var name = new string('1', 50);
+
+        //act
+        Action act = () => new PhoneBook(phoneNumber, name);
+
+        //assert
+        act
+            .Should()
+            .Throw<ArgumentException>()
+            .WithMessage("*only contain letters and spaces*");
+    }
 }
