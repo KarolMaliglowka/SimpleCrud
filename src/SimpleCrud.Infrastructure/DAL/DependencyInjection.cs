@@ -9,6 +9,7 @@ internal static class DependencyInjection
     {
         const string connectionString =
             "Host=192.168.77.202;Database=SimpleCrudDb;Username=postgresuser;Password=kalifornia";
+        
         services.AddDbContext<SimpleCrudDbContext>(x => x.UseNpgsql(connectionString));
 
         return services;
