@@ -30,6 +30,25 @@
       <ProjectReference Include="..\SimpleCrud.Infrastructure\SimpleCrud.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="ClientApp\src\assets\demo\data\countries.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\src\assets\demo\data\customers-large.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\src\assets\demo\data\customers-medium.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\src\assets\demo\data\customers-small.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\src\assets\demo\data\files-lazy.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\src\assets\demo\data\files.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\src\assets\demo\data\filesystem-lazy.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\src\assets\demo\data\filesystem.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\src\assets\demo\data\icons.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\src\assets\demo\data\photos.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\src\assets\demo\data\products-mixed.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\src\assets\demo\data\products-orders-small.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\src\assets\demo\data\products-orders.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\src\assets\demo\data\products-small.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\src\assets\demo\data\products.json" />
+      <_ContentIncludedByDefault Remove="ClientApp\src\assets\demo\data\scheduleevents.json" />
+    </ItemGroup>
+
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
         <!-- Ensure Node.js is installed -->
         <Exec Command="node --version" ContinueOnError="true">
