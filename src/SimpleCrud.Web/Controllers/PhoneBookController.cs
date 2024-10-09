@@ -51,7 +51,7 @@ public class PhoneBookController(IPhoneBookRepository phoneBookRepository) : Con
         }
         phone.PhoneNumber = command.PhoneNumber;
         phone.Name = command.Name;
-        await phoneBookRepository.UpdateAsync(phone);
+        await phoneBookRepository.Update(phone);
         return Ok();
     }
 
