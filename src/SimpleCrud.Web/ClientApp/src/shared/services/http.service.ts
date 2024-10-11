@@ -14,15 +14,15 @@ export class HttpService {
     }
 
     get<T>(url: string, params?: {}): Observable<T> {
-        if (!params){
+        if (!params) {
             return this.http.get<T>(this.baseUrl + url).pipe(
                 catchError(this.handleError<any>(`Failed to get records from ${url}`))
             );
         }
 
         let paramsObj = new HttpParams();
-        for (const key in params){
-            if (!params[key]){
+        for (const key in params) {
+            if (!params[key]) {
                 continue;
             }
             paramsObj = paramsObj.set(key, params[key]);

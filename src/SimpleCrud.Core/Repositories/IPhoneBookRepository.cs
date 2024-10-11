@@ -8,7 +8,7 @@ public interface IPhoneBookRepository
     Task<IEnumerable<PhoneBook>> GetAllAsync();
     Task<PhoneBook> GetAsyncById(Guid id);
     Task AddAsync(PhoneBook phoneBook);
-    Task UpdateAsync(PhoneBook phoneBook);
+    Task Update(PhoneBook phoneBook);
     Task Remove(PhoneBook phoneBook);
     Task<PhoneBook> GetAsyncByPhoneNumber(string phoneNumber);
 }

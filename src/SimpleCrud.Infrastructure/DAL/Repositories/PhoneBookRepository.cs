@@ -24,7 +24,7 @@ public class PhoneBookRepository(SimpleCrudDbContext dbContext) : IPhoneBookRepo
         await dbContext.SaveChangesAsync();
     }
 
-    public async Task UpdateAsync(PhoneBook phoneBook)
+    public async Task Update(PhoneBook phoneBook)
     {
         dbContext.Update(phoneBook);
         await dbContext.SaveChangesAsync();
