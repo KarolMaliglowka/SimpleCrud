@@ -1,14 +1,12 @@
 <p-table [value]="" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template pTemplate="header">
         <tr>
-            <th>Id</th>
             <th>Name</th>
             <th>Number</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-phone>
         <tr>
-            <td>{{ phone.id }}</td>
             <td>{{ phone.name }}</td>
             <td>{{ phone.number }}</td>
         </tr>
