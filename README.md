@@ -35,7 +35,7 @@ tbd
 
 ### Web Layer
 
-The application uses React Node.js
+The application uses React NEXT.js
 
 
 ## Tests
