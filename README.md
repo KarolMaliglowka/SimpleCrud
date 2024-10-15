@@ -35,7 +35,7 @@ tbd
 
 ### Web Layer
 
-tbd
+The application uses React Node.js
 
 
 ## Tests
