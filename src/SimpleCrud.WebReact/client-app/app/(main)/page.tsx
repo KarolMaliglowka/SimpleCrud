@@ -36,13 +36,12 @@ export default function Phones() {
     const dt = useRef(null);
 
     useEffect(() => {
-        GetData().then((data) => setPhones(data));
+        fetchUsers().then((data) => setPhones(data));
     }, []);
 
-    const GetData = async () => {
-        const dataPhone = await fetch('https://localhost:7026/phonebook');
-        const data: PhoneDto = await dataPhone.json();
-        console.log(data);
+    async function fetchUsers(): Promise<PhoneDto[]> {
+        const response = await fetch('https://localhost:7026/phonebook');
+        const data = await response.json();
         return data;
     }
 
