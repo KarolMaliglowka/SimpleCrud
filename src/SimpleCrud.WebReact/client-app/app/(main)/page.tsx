@@ -36,13 +36,13 @@ export default function Phones() {
     const dt = useRef(null);
 
     useEffect(() => {
-        fetchPhones().then((data) => setPhones(data));
+        getALlPhones().then();
     }, []);
 
-    async function fetchPhones(): Promise<PhoneDto[]> {
-        const response = await fetch('https://localhost:7026/phonebook');
-        const data = await response.json();
-        return data;
+    async function getALlPhones() {
+        const response = await fetch('https://localhost:7026/phonebook')
+            .then(response => response.json())
+            .then(data => setPhones(data));
     }
 
     const openNew = () => {
@@ -68,7 +68,7 @@ export default function Phones() {
         setSubmitted(true);
 
         if (phone.name.trim()) {
-            let _phones = [...phones];
+            let _phones: PhoneDto[] = [...phones];
             let _phone = {...phone};
 
             if (phone.id) {
