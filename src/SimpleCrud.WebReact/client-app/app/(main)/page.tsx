@@ -10,6 +10,7 @@ import {Toolbar} from 'primereact/toolbar';
 // import { InputIcon } from 'primereact/inputicon';
 import {Dialog} from 'primereact/dialog';
 import {InputText} from 'primereact/inputtext';
+import {baseUrl} from '@/environment/environment';
 
 export interface PhoneDto {
     id: string
@@ -40,7 +41,7 @@ export default function Phones() {
     }, []);
 
     async function getALlPhones() {
-        const response = await fetch('https://localhost:7026/phonebook')
+        const response = await fetch(baseUrl+'/phonebook')
             .then(response => response.json())
             .then(data => setPhones(data));
     }
