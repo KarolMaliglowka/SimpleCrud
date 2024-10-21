@@ -41,7 +41,7 @@ export default function Phones() {
     }, []);
 
     async function getALlPhones() {
-        const response = await fetch(baseUrl+'/phonebook')
+        await fetch(baseUrl+'/phonebook')
             .then(response => response.json())
             .then(data => setPhones(data));
     }
