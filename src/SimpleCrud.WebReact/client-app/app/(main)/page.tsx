@@ -10,14 +10,13 @@ import {Toolbar} from 'primereact/toolbar';
 // import { InputIcon } from 'primereact/inputicon';
 import {Dialog} from 'primereact/dialog';
 import {InputText} from 'primereact/inputtext';
-import {baseUrl} from '@/environment/environment';
+import {get, post} from '@/shared/services/fetch.service';
 
 export interface PhoneDto {
     id: string
     phoneNumber: string
     name: string
 }
-
 export default function Phones() {
     let emptyPhone = {
         id: null,
@@ -37,14 +36,22 @@ export default function Phones() {
     const dt = useRef(null);
 
     useEffect(() => {
-        getALlPhones().then();
+        getALlPhones();
     }, []);
 
     async function getALlPhones() {
-        await fetch(baseUrl+'/phonebook')
-            .then(response => response.json())
+        get('phonebook')
             .then(data => setPhones(data));
     }
+
+    async function createNewPhone(_phone) {
+        let newPhone = {
+            name: _phone.name,
+            phoneNumber: _phone.phoneNumber
+        }
+        await post('phonebook/create', newPhone);
+    }
+
 
     const openNew = () => {
         setPhone(emptyPhone);
@@ -67,9 +74,8 @@ export default function Phones() {
 
     const savePhone = () => {
         setSubmitted(true);
-
         if (phone.name.trim()) {
-            let _phones: PhoneDto[] = [...phones];
+            let _phones = [...phones];
             let _phone = {...phone};
 
             if (phone.id) {
@@ -78,8 +84,7 @@ export default function Phones() {
                 _phones[index] = _phone;
                 toast.current.show({severity: 'success', summary: 'Successful', detail: 'Phone Updated', life: 3000});
             } else {
-                _phone.id = createId();
-                _phone.image = 'product-placeholder.svg';
+                createNewPhone(_phone).then(r => r);
                 _phones.push(_phone);
                 toast.current.show({severity: 'success', summary: 'Successful', detail: 'Phone Created', life: 3000});
             }
