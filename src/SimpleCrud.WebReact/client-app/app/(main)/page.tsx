@@ -24,7 +24,7 @@ export default function Phones() {
         phoneNumber: ''
     };
 
-    const [phones, setPhones] = useState();
+    const [phones, setPhones] = useState<any[]>([]);
     const [phoneDialog, setPhoneDialog] = useState(false);
     const [deletePhoneDialog, setDeletePhoneDialog] = useState(false);
     const [deletePhonesDialog, setDeletePhonesDialog] = useState(false);
@@ -107,7 +107,6 @@ export default function Phones() {
 
     const deletePhone = () => {
         let _phones = phones.filter((val) => val.id !== phone.id);
-
         setPhones(_phones);
         setDeletePhoneDialog(false);
         setPhone(emptyPhone);
