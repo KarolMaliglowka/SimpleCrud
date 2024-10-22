@@ -1,5 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using SimpleCrud.Application;
 using SimpleCrud.Infrastructure;
+using SimpleCrud.Infrastructure.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,5 +43,18 @@ app.MapControllerRoute(
     pattern: "{controller}/{action=Index}/{id?}");
 
 app.MapFallbackToFile("index.html");
-
+ApplyMigration();
 app.Run();
+return;
+
+void ApplyMigration()
+{
+    using var scope = app.Services.CreateScope();
+    
+    var db=scope.ServiceProvider.GetRequiredService<SimpleCrudDbContext>();
+    //db.Database.EnsureCreated();
+    if(db.Database.GetPendingMigrations().Any())
+    {
+        db.Database.Migrate();
+    }
+}
