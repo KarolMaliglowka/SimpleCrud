@@ -8,7 +8,7 @@ internal static class DependencyInjection
     public static IServiceCollection AddPostgres(this IServiceCollection services)
     {
         const string connectionString =
-            "Host=192.168.77.202;Database=SimpleCrudDb;Username=postgresuser;Password=kalifornia";
+            "Host=127.0.0.1:5432;Database=SimpleCrudDb;Username=postgres;Password=postgres";
         
         services.AddDbContext<SimpleCrudDbContext>(x => x.UseNpgsql(connectionString));
 
