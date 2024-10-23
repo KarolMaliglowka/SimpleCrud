@@ -1,6 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Storage;
 using SimpleCrud.Application;
 using SimpleCrud.Infrastructure;
 using SimpleCrud.Infrastructure.DAL;
@@ -50,9 +48,7 @@ return;
 void ApplyMigration()
 {
     using var scope = app.Services.CreateScope();
-    
     var db=scope.ServiceProvider.GetRequiredService<SimpleCrudDbContext>();
-    //db.Database.EnsureCreated();
     if(db.Database.GetPendingMigrations().Any())
     {
         db.Database.Migrate();
