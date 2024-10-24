@@ -1,7 +1,7 @@
 SimpleCrud - PhoneBook
 ========================
 
-Simple crud application, backend in dotnet, fronted in Angular with PrimeNG
+Simple crud application, backend in dotnet, fronted in React with PrimeReact
 
 
 - [About](#about)
