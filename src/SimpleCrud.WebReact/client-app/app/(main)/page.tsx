@@ -249,9 +249,9 @@ export default function Phones() {
                     <label htmlFor="phoneNumber" className="font-bold">
                         Phone number
                     </label>
-                    <InputText id="phoneNumber" value={phone.phoneNumber} required
-                               onChange={(e) => onInputChange(e, 'phoneNumber')}
+                    <InputText id="phoneNumber" value={phone.phoneNumber} onChange={(e) => onInputChange(e, 'phoneNumber')} required
                                className={classNames({'p-invalid': submitted && !phone.phoneNumber})}/>
+                    {submitted && !phone.phoneNumber && <small className="p-error">Phone number is required.</small>}
                 </div>
             </Dialog>
 
