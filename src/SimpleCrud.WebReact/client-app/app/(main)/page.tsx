@@ -10,7 +10,7 @@ import {Toolbar} from 'primereact/toolbar';
 // import { InputIcon } from 'primereact/inputicon';
 import {Dialog} from 'primereact/dialog';
 import {InputText} from 'primereact/inputtext';
-import {get, post} from '@/shared/services/fetch.service';
+import {get, post, put} from '@/shared/services/fetch.service';
 
 export interface PhoneDto {
     id: string
@@ -52,6 +52,13 @@ export default function Phones() {
         await post('phonebook/create', newPhone);
     }
 
+    async function updatePhone(_phone) {
+        let newPhone = {
+            name: _phone.name,
+            phoneNumber: _phone.phoneNumber
+        }
+        await put('phonebook/update', _phone);
+    }
 
     const openNew = () => {
         setPhone(emptyPhone);
@@ -79,8 +86,8 @@ export default function Phones() {
             let _phone = {...phone};
 
             if (phone.id) {
+                updatePhone(_phone).then();
                 const index = findIndexById(phone.id);
-
                 _phones[index] = _phone;
                 toast.current.show({severity: 'success', summary: 'Successful', detail: 'Phone Updated', life: 3000});
             } else {
