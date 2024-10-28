@@ -1,7 +1,7 @@
-SimpleCrud
+SimpleCrud - PhoneBook
 ========================
 
-Simple crud application, backend in dotnet, fronted in Angular with PrimeNG
+Simple crud application, backend in dotnet, fronted in React with PrimeReact
 
 
 - [About](#about)
@@ -16,8 +16,7 @@ Simple crud application, backend in dotnet, fronted in Angular with PrimeNG
 
 ## About
 
-**The Simple Crud** is an application .
-
+**The Simple Crud** is a simple application designed to show how you can create a simple phone book
 
 ## Solution structure
 
