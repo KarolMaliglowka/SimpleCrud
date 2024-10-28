@@ -10,10 +10,10 @@ import {Toolbar} from 'primereact/toolbar';
 // import { InputIcon } from 'primereact/inputicon';
 import {Dialog} from 'primereact/dialog';
 import {InputText} from 'primereact/inputtext';
-import {get, post, put} from '@/shared/services/fetch.service';
+import {getAll, create, update, remove} from '@/shared/services/fetch.service';
 
 export interface PhoneDto {
-    id: string
+    id: null
     phoneNumber: string
     name: string
 }
@@ -36,28 +36,28 @@ export default function Phones() {
     const dt = useRef(null);
 
     useEffect(() => {
-        getALlPhones();
+        getALlPhones().then();
     }, []);
 
     async function getALlPhones() {
-        get('phonebook')
+        getAll('phonebook')
             .then(data => setPhones(data));
     }
 
-    async function createNewPhone(_phone) {
+    async function createNewPhone(_phone: PhoneDto) {
         let newPhone = {
             name: _phone.name,
             phoneNumber: _phone.phoneNumber
         }
-        await post('phonebook/create', newPhone);
+        await create('phonebook/create', newPhone);
     }
 
-    async function updatePhone(_phone) {
-        let newPhone = {
-            name: _phone.name,
-            phoneNumber: _phone.phoneNumber
-        }
-        await put('phonebook/update', _phone);
+    async function updatePhone(_phone: PhoneDto) {
+        await update('phonebook/update', _phone);
+    }
+
+    async function removePhone(_phone: PhoneDto) {
+        await remove('phonebook/delete', _phone);
     }
 
     const openNew = () => {
@@ -82,8 +82,8 @@ export default function Phones() {
     const savePhone = () => {
         setSubmitted(true);
         if (phone.name.trim()) {
-            let _phones = [...phones];
-            let _phone = {...phone};
+            let _phones: PhoneDto[] = [...phones];
+            let _phone: PhoneDto = {...phone};
 
             if (phone.id) {
                 updatePhone(_phone).then();
@@ -102,7 +102,7 @@ export default function Phones() {
         }
     };
 
-    const editPhone = (phone) => {
+    const editPhone = (phone: PhoneDto) => {
         setPhone({...phone});
         setPhoneDialog(true);
     };
@@ -110,6 +110,7 @@ export default function Phones() {
     const confirmDeletePhone = (phone) => {
         setPhone(phone);
         setDeletePhoneDialog(true);
+
     };
 
     const deletePhone = () => {
@@ -117,6 +118,7 @@ export default function Phones() {
         setPhones(_phones);
         setDeletePhoneDialog(false);
         setPhone(emptyPhone);
+        removePhone(phone).then();
         toast.current.show({severity: 'success', summary: 'Successful', detail: 'Phone Deleted', life: 3000});
     };
 
@@ -131,17 +133,6 @@ export default function Phones() {
         }
 
         return index;
-    };
-
-    const createId = () => {
-        let id = '';
-        let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-        for (let i = 0; i < 5; i++) {
-            id += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-
-        return id;
     };
 
     const exportCSV = () => {

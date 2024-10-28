@@ -1,6 +1,6 @@
 import {baseUrl} from "@/environment/environment";
 
-export async function get(route: string) {
+export async function getAll(route: string) {
     try {
         const response = await fetch(`${baseUrl}/${route}`, {
             method: 'GET',
@@ -13,7 +13,7 @@ export async function get(route: string) {
     }
 }
 
-export async function post(route: string, body: any) {
+export async function create(route: string, body: any) {
     const request = new Request(`${baseUrl}/${route}`, {
         method: "POST",
         headers: {
@@ -31,13 +31,31 @@ export async function post(route: string, body: any) {
     }
 }
 
-export async function put(route: string, body: any) {
+export async function update(route: string, body: any) {
     const request = new Request(`${baseUrl}/${route}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
+    });
+
+    try {
+        const response = await fetch(request);
+        const result = await response.json();
+        console.log("Success:", result);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+export async function remove(route: string, body: any) {
+    const request = new Request(`${baseUrl}/${route}/${body.id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: null,
     });
 
     try {
