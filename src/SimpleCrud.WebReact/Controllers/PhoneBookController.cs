@@ -12,8 +12,7 @@ public class PhoneBookController(IPhoneBookRepository phoneBookRepository) : Con
     [HttpGet]
     public async Task<ActionResult<List<PhoneDto?>?>> GetAll()
     {
-        var getAllAsync = (await phoneBookRepository
-            .GetAllAsync())
+        var getAllAsync = (await phoneBookRepository.GetAllAsync())
             .ToList();
         return Ok(getAllAsync.ToList());
     }
@@ -27,6 +26,7 @@ public class PhoneBookController(IPhoneBookRepository phoneBookRepository) : Con
         {
             throw new NullReferenceException("No record");
         }
+
         return new PhoneDto
         {
             Id = phone.Id,
@@ -53,6 +53,7 @@ public class PhoneBookController(IPhoneBookRepository phoneBookRepository) : Con
         {
             throw new NullReferenceException("No record");
         }
+
         phone.PhoneNumber = command.PhoneNumber;
         phone.Name = command.Name;
         await phoneBookRepository
@@ -69,6 +70,7 @@ public class PhoneBookController(IPhoneBookRepository phoneBookRepository) : Con
         {
             throw new NullReferenceException("No record");
         }
+
         await phoneBookRepository
             .Remove(phone);
         return Ok();
@@ -83,6 +85,7 @@ public class PhoneBookController(IPhoneBookRepository phoneBookRepository) : Con
         {
             throw new NullReferenceException("No record");
         }
+
         return new PhoneDto
         {
             Id = phone.Id,
