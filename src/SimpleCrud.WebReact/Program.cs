@@ -12,8 +12,8 @@ builder.Services
     .AddInfrastructure(builder.Configuration)
     .AddApplication();
 
-builder.Services.AddCors(options => options.AddPolicy("ApiCorsPolicy",
-    corsPolicyBuilder =>
+builder.Services
+    .AddCors(options => options.AddPolicy("ApiCorsPolicy", corsPolicyBuilder =>
     {
         corsPolicyBuilder
             .WithOrigins("http://localhost:3000")
@@ -43,13 +43,14 @@ app.MapControllerRoute(
 app.MapFallbackToFile("index.html");
 ApplyMigration();
 app.Run();
+
 return;
 
 void ApplyMigration()
 {
     using var scope = app.Services.CreateScope();
-    var db=scope.ServiceProvider.GetRequiredService<SimpleCrudDbContext>();
-    if(db.Database.GetPendingMigrations().Any())
+    var db = scope.ServiceProvider.GetRequiredService<SimpleCrudDbContext>();
+    if (db.Database.GetPendingMigrations().Any())
     {
         db.Database.Migrate();
     }
