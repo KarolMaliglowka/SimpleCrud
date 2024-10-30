@@ -33,7 +33,7 @@ export async function create(route: string, body: any) {
 
 export async function update(route: string, body: any) {
     const request = new Request(`${baseUrl}/${route}`, {
-        method: "PUT",
+        method: "PATCH",
         headers: {
             "Content-Type": "application/json",
         },

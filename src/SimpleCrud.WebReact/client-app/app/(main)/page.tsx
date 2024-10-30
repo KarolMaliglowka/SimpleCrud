@@ -11,6 +11,7 @@ import {Toolbar} from 'primereact/toolbar';
 import {Dialog} from 'primereact/dialog';
 import {InputText} from 'primereact/inputtext';
 import {getAll, create, update, remove} from '@/shared/services/fetch.service';
+import {InputMask} from "primereact/inputmask";
 
 export interface PhoneDto {
     id: null
@@ -239,16 +240,29 @@ export default function Phones() {
                     <label htmlFor="name" className="font-bold">
                         Name
                     </label>
-                    <InputText id="name" value={phone.name} onChange={(e) => onInputChange(e, 'name')} required
+                    <InputText id="name" value={phone.name}
+                               onChange={(e) => onInputChange(e, 'name')} required
                                autoFocus className={classNames({'p-invalid': submitted && !phone.name})}/>
                     {submitted && !phone.name && <small className="p-error">Name is required.</small>}
                 </div>
                 <div className="field">
-                    <label htmlFor="phoneNumber" className="font-bold">
-                        Phone number
-                    </label>
-                    <InputText id="phoneNumber" value={phone.phoneNumber} onChange={(e) => onInputChange(e, 'phoneNumber')} required
-                               className={classNames({'p-invalid': submitted && !phone.phoneNumber})}/>
+                    {/*<label htmlFor="phoneNumber" className="font-bold">*/}
+                    {/*    Phone number*/}
+                    {/*</label>*/}
+                    {/*<InputText id="phoneNumber" value={phone.phoneNumber}*/}
+                    {/*           onChange={(e) => onInputChange(e, 'phoneNumber')} required*/}
+                    {/*           className={classNames({'p-invalid': submitted && !phone.phoneNumber})}/>*/}
+                    {/*{submitted && !phone.phoneNumber && <small className="p-error">Phone number is required.</small>}*/}
+                    {/*<label htmlFor="phoneNumber" className="font-bold block mb-2">Phone number</label>*/}
+                    <InputMask
+                        id="phoneNumber"
+                        value={phone.phoneNumber}
+                        onChange={(e) => onInputChange(e, 'phoneNumber')}
+                        required
+                        className={classNames({'p-invalid': submitted && !phone.phoneNumber})}
+                        mask="999-999-999"
+                        placeholder="999-999-999">
+                    </InputMask>
                     {submitted && !phone.phoneNumber && <small className="p-error">Phone number is required.</small>}
                 </div>
             </Dialog>
