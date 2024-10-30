@@ -44,7 +44,7 @@ public class PhoneBookController(IPhoneBookRepository phoneBookRepository) : Con
         return Created();
     }
 
-    [HttpPut("update")]
+    [HttpPatch("update")]
     public async Task<ActionResult<PhoneDto>> Edit([FromBody] PhoneDto command)
     {
         var phone = await phoneBookRepository
@@ -53,9 +53,9 @@ public class PhoneBookController(IPhoneBookRepository phoneBookRepository) : Con
         {
             throw new NullReferenceException("No record");
         }
+        phone.SetPhoneNumber(command.PhoneNumber);
+        phone.SetName(command.Name);
 
-        phone.PhoneNumber = command.PhoneNumber;
-        phone.Name = command.Name;
         await phoneBookRepository
             .Update(phone);
         return Ok();

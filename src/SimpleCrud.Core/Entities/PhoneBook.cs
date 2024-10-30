@@ -20,7 +20,7 @@ public partial class PhoneBook
     public string PhoneNumber { get; set; }
     public string Name { get; set; }
 
-    private void SetPhoneNumber(string phoneNumber)
+    public void SetPhoneNumber(string phoneNumber)
     {
         if (string.IsNullOrWhiteSpace(phoneNumber))
         {
@@ -40,7 +40,7 @@ public partial class PhoneBook
         PhoneNumber = phoneNumber;
     }
 
-    private void SetName(string name)
+    public void SetName(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
@@ -58,7 +58,7 @@ public partial class PhoneBook
         Name = name;
     }
 
-    [GeneratedRegex(@"^[a-zA-Z\s]+$")]
+    [GeneratedRegex(@"^[a-zA-Z0-9\s]+$")]
     private static partial Regex PhoneNameFormatRegex();
 
     [GeneratedRegex(@"^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d$")]
