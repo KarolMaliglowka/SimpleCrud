@@ -26,7 +26,7 @@ Database model with a phone list table is included.
 
 ### Infrastructure Layer
 
-tbd
+This layer contains implemented database accesses, configurations and repositories.
 
 ### Application Layer
 
