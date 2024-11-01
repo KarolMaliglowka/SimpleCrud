@@ -16,7 +16,7 @@ Simple crud application, backend in dotnet, fronted in React with PrimeReact
 
 ## About
 
-**The Simple Crud** is a simple application designed to show how you can create a simple phone book
+**The Simple Crud** is a simple application designed to show how you can create a simple phone book.
 
 ## Solution structure
 
