@@ -3,7 +3,6 @@ SimpleCrud - PhoneBook
 
 ![image](./accessories/phonebook.png)
 
-Simple crud application, backend in dotnet, fronted in React with PrimeReact
 
 - [About](#about)
 - [Solution structure](#solution-structure)
@@ -17,7 +16,14 @@ Simple crud application, backend in dotnet, fronted in React with PrimeReact
 
 ## About
 
-**The Simple Crud** is a simple application designed to show how you can create a simple phone book.
+**The Simple Crud**  is software application with phone book functionality is a tool that allows you to store, manage and search for contacts. Such software can be used for both personal and business purposes. Here are some key features it can offer:
+1. Contact Storage: Ability to add and edit contact information such as name, surname, phone number, email address, physical address and other data.
+2. Search and filter: Quickly search for contacts using various criteria, such as name, surname, company or phone number.
+3. Export: Integration with other applications and devices.
+4. Ability to add notes to contacts.
+
+Such software can make contact management much easier and improve communication efficiency.
+
 
 ## Solution structure
 
