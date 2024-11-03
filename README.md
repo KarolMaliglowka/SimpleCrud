@@ -2,7 +2,7 @@ SimpleCrud - PhoneBook
 ========================
 
 Simple crud application, backend in dotnet, fronted in React with PrimeReact
-
+![image](./accessories/phonebook.png)
 
 - [About](#about)
 - [Solution structure](#solution-structure)
