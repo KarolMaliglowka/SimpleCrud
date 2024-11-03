@@ -18,6 +18,7 @@ export interface PhoneDto {
     phoneNumber: string
     name: string
 }
+
 export default function Phones() {
     let emptyPhone = {
         id: null,
@@ -111,7 +112,6 @@ export default function Phones() {
     const confirmDeletePhone = (phone) => {
         setPhone(phone);
         setDeletePhoneDialog(true);
-
     };
 
     const deletePhone = () => {
@@ -156,9 +156,7 @@ export default function Phones() {
     const onInputChange = (e, name) => {
         const val = (e.target && e.target.value) || '';
         let _phone = {...phone};
-
         _phone[`${name}`] = val;
-
         setPhone(_phone);
     };
 
@@ -195,6 +193,7 @@ export default function Phones() {
             {/*</IconField>*/}
         </div>
     );
+
     const phoneDialogFooter = (
         <React.Fragment>
             <Button label="Cancel" icon="pi pi-times" outlined onClick={hideDialog}/>
@@ -219,7 +218,6 @@ export default function Phones() {
             <Toast ref={toast}/>
             <div className="card">
                 <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
-
                 <DataTable ref={dt} value={phones} selection={selectedPhones} showGridlines
                            onSelectionChange={(e) => setSelectedPhones(e.value)}
                            dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
@@ -261,7 +259,7 @@ export default function Phones() {
                         required
                         className={classNames({'p-invalid': submitted && !phone.phoneNumber})}
                         mask="999-999-999"
-                        placeholder="999-999-999">
+                        placeholder="___-___-___">
                     </InputMask>
                     {submitted && !phone.phoneNumber && <small className="p-error">Phone number is required.</small>}
                 </div>
