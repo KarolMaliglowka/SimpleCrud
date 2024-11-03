@@ -10,7 +10,7 @@ import {Toolbar} from 'primereact/toolbar';
 // import { InputIcon } from 'primereact/inputicon';
 import {Dialog} from 'primereact/dialog';
 import {InputText} from 'primereact/inputtext';
-import {getAll, create, update, remove} from '@/shared/services/fetch.service';
+import {getAll, create, update, remove, removeMany} from '@/shared/services/fetch.service';
 import {InputMask} from "primereact/inputmask";
 
 export interface PhoneDto {
@@ -31,7 +31,7 @@ export default function Phones() {
     const [deletePhoneDialog, setDeletePhoneDialog] = useState(false);
     const [deletePhonesDialog, setDeletePhonesDialog] = useState(false);
     const [phone, setPhone] = useState(emptyPhone);
-    const [selectedPhones, setSelectedPhones] = useState(null);
+    const [selectedPhones, setSelectedPhones] = useState([]);
     const [submitted, setSubmitted] = useState(false);
     const [globalFilter, setGlobalFilter] = useState(null);
     const toast = useRef(null);
@@ -60,6 +60,10 @@ export default function Phones() {
 
     async function removePhone(_phone: PhoneDto) {
         await remove('phonebook/delete', _phone);
+    }
+
+    async function removeManyPhones(_phones: PhoneDto[]) {
+        await removeMany('phonebook/deletemany', _phones);
     }
 
     const openNew = () => {
@@ -142,10 +146,15 @@ export default function Phones() {
 
     const confirmDeleteSelected = () => {
         setDeletePhonesDialog(true);
+
     };
 
     const deleteSelectedPhones = () => {
         let _phones = phones.filter((val) => !selectedPhones.includes(val));
+        if(selectedPhones !== null) {
+            let Phones = selectedPhones.map(phone => phone.id);
+            removeManyPhones(Phones).then();
+        }
 
         setPhones(_phones);
         setDeletePhonesDialog(false);

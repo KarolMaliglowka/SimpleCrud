@@ -31,6 +31,12 @@ public class PhoneBookRepository(SimpleCrudDbContext dbContext) : IPhoneBookRepo
         dbContext.PhonesBooks.Remove(phoneBook);
         await dbContext.SaveChangesAsync();
     }
+    
+    public async Task RemoveMany(IEnumerable<PhoneBook> phoneBooks)
+    {
+        dbContext.PhonesBooks.RemoveRange(phoneBooks);
+        await dbContext.SaveChangesAsync();
+    }
 
     public async Task<PhoneBook> GetAsyncByPhoneNumber(string phoneNumber) =>
         await dbContext.PhonesBooks.FirstAsync(pb => pb.PhoneNumber == phoneNumber);
