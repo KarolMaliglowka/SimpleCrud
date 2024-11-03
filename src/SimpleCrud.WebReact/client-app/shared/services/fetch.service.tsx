@@ -19,7 +19,7 @@ export async function create(route: string, body: any) {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
     });
 
     try {
@@ -37,7 +37,7 @@ export async function update(route: string, body: any) {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
     });
 
     try {
@@ -55,7 +55,25 @@ export async function remove(route: string, body: any) {
         headers: {
             "Content-Type": "application/json",
         },
-        body: null,
+        body: null
+    });
+
+    try {
+        const response = await fetch(request);
+        const result = await response.json();
+        console.log("Success:", result);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+export async function removeMany(route: string, body: any) {
+    const request = new Request(`${baseUrl}/${route}/`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body)
     });
 
     try {
