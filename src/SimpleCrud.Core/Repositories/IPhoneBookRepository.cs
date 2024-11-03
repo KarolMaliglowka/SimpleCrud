@@ -9,6 +9,7 @@ public interface IPhoneBookRepository
     Task AddAsync(PhoneBook phoneBook);
     Task Update(PhoneBook phoneBook);
     Task Remove(PhoneBook phoneBook);
+    Task RemoveMany(IEnumerable<PhoneBook> phoneBooks);
     Task<PhoneBook> GetAsyncByPhoneNumber(string phoneNumber);
     Task<PhoneBook> GetAsyncByPhoneName(string phoneName);
     Task<bool> ExistByPhoneName(string phoneName);
