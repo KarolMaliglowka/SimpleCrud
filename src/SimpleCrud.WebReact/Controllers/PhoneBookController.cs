@@ -93,4 +93,22 @@ public class PhoneBookController(IPhoneBookRepository phoneBookRepository) : Con
             PhoneNumber = phone.PhoneNumber
         };
     }
+    
+    [HttpGet("getByPhoneName/{phoneName}")]
+    public async Task<ActionResult<PhoneDto>> GetByPhoneName(string phoneName)
+    {
+        var phone = await phoneBookRepository
+            .GetAsyncByPhoneName(phoneName);
+        if (phone == null)
+        {
+            throw new NullReferenceException("No record");
+        }
+
+        return new PhoneDto
+        {
+            Id = phone.Id,
+            Name = phone.Name,
+            PhoneNumber = phone.PhoneNumber
+        };
+    }
 }

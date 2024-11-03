@@ -6,10 +6,6 @@ namespace SimpleCrud.Infrastructure.DAL.Repositories;
 
 public class PhoneBookRepository(SimpleCrudDbContext dbContext) : IPhoneBookRepository
 {
-    public IQueryable<PhoneBook> Query() =>
-        dbContext.PhonesBooks
-            .AsNoTracking();
-
     public async Task<IEnumerable<PhoneBook>> GetAllAsync() =>
         await dbContext.PhonesBooks
             .OrderBy(x => x.Name)
@@ -38,4 +34,13 @@ public class PhoneBookRepository(SimpleCrudDbContext dbContext) : IPhoneBookRepo
 
     public async Task<PhoneBook> GetAsyncByPhoneNumber(string phoneNumber) =>
         await dbContext.PhonesBooks.FirstAsync(pb => pb.PhoneNumber == phoneNumber);
+    
+    public async Task<PhoneBook> GetAsyncByPhoneName(string phoneName) =>
+        await dbContext.PhonesBooks.FirstAsync(pb => pb.Name == phoneName);
+
+    public Task<bool> ExistByPhoneNumber(string phoneNumber) =>
+         dbContext.PhonesBooks.AnyAsync(pb => pb.PhoneNumber == phoneNumber);
+    
+    public Task<bool> ExistByPhoneName(string phoneName) =>
+        dbContext.PhonesBooks.AnyAsync(pb => pb.Name == phoneName);
 }
