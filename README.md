@@ -46,7 +46,6 @@ The application uses React NEXT.js, to learn more about Next.js, take a look at 
 -   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 -   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-
 ## Tests
 
 ### Unit tests
