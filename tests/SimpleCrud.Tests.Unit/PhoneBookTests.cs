@@ -128,7 +128,7 @@ public class PhoneBookTests
     {
         //arrange
         const string phoneNumber = "000000000";
-        var name = new string('1', 50);
+        var name = new string('#', 50);
 
         //act
         Action act = () => new PhoneBook(phoneNumber, name);
