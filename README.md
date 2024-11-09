@@ -50,7 +50,7 @@ The application uses React NEXT.js, to learn more about Next.js, take a look at 
 
 ### Unit tests
 
-Tests for the PhoneBook model are added, using [NUnit](https://nunit.org/) and [Fluent Assertions](https://fluentassertions.com/)
+Tests for the PhoneBook model are added, using [NUnit](https://nunit.org/) and [Fluent Assertions](https://fluentassertions.com/).
 
 ## Work with application
 
