@@ -6,8 +6,8 @@ import {Column} from 'primereact/column';
 import {Toast} from 'primereact/toast';
 import {Button} from 'primereact/button';
 import {Toolbar} from 'primereact/toolbar';
-// import { IconField } from 'primereact/iconfield';
-// import { InputIcon } from 'primereact/inputicon';
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
 import {Dialog} from 'primereact/dialog';
 import {InputText} from 'primereact/inputtext';
 import {getAll, create, update, remove, removeMany} from '@/shared/services/fetch.service';
@@ -196,10 +196,10 @@ export default function Phones() {
     const header = (
         <div className="flex flex-wrap gap-2 align-items-center justify-content-between">
             <h4 className="m-0">Manage phones</h4>
-            {/*<IconField iconPosition="left">*/}
-            {/*    <InputIcon className="pi pi-search" />*/}
-            {/*    <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />*/}
-            {/*</IconField>*/}
+            <IconField iconPosition="left">
+                <InputIcon className="pi pi-search" />
+                <InputText type="search" onInput={(e) => setGlobalFilter(e.target.value)} placeholder="Search..." />
+            </IconField>
         </div>
     );
 
