@@ -1,22 +1,22 @@
 'use client';
-import React, {useState, useEffect, useRef} from 'react';
-import {classNames} from 'primereact/utils';
-import {DataTable} from 'primereact/datatable';
-import {Column} from 'primereact/column';
-import {Toast} from 'primereact/toast';
-import {Button} from 'primereact/button';
-import {Toolbar} from 'primereact/toolbar';
+import React, { useState, useEffect, useRef } from 'react';
+import { classNames } from 'primereact/utils';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Toast } from 'primereact/toast';
+import { Button } from 'primereact/button';
+import { Toolbar } from 'primereact/toolbar';
 import { IconField } from 'primereact/iconfield';
 import { InputIcon } from 'primereact/inputicon';
-import {Dialog} from 'primereact/dialog';
-import {InputText} from 'primereact/inputtext';
-import {getAll, create, update, remove, removeMany} from '@/shared/services/fetch.service';
-import {InputMask} from "primereact/inputmask";
+import { Dialog } from 'primereact/dialog';
+import { InputText } from 'primereact/inputtext';
+import { getAll, create, update, remove, removeMany } from '@/shared/services/fetch.service';
+import { InputMask } from 'primereact/inputmask';
 
 export interface PhoneDto {
-    id: null
-    phoneNumber: string
-    name: string
+    id: null;
+    phoneNumber: string;
+    name: string;
 }
 
 export default function Phones() {
@@ -50,7 +50,7 @@ export default function Phones() {
         let newPhone = {
             name: _phone.name,
             phoneNumber: _phone.phoneNumber
-        }
+        };
         await create('phonebook/create', newPhone);
     }
 
@@ -89,17 +89,17 @@ export default function Phones() {
         setSubmitted(true);
         if (phone.name.trim()) {
             let _phones: PhoneDto[] = [...phones];
-            let _phone: PhoneDto = {...phone};
+            let _phone: PhoneDto = { ...phone };
 
             if (phone.id) {
                 updatePhone(_phone).then();
                 const index = findIndexById(phone.id);
                 _phones[index] = _phone;
-                toast.current.show({severity: 'success', summary: 'Successful', detail: 'Phone Updated', life: 3000});
+                toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Phone Updated', life: 3000 });
             } else {
                 createNewPhone(_phone).then(r => r);
                 _phones.push(_phone);
-                toast.current.show({severity: 'success', summary: 'Successful', detail: 'Phone Created', life: 3000});
+                toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Phone Created', life: 3000 });
             }
 
             setPhones(_phones);
@@ -109,7 +109,7 @@ export default function Phones() {
     };
 
     const editPhone = (phone: PhoneDto) => {
-        setPhone({...phone});
+        setPhone({ ...phone });
         setPhoneDialog(true);
     };
 
@@ -124,7 +124,7 @@ export default function Phones() {
         setDeletePhoneDialog(false);
         setPhone(emptyPhone);
         removePhone(phone).then();
-        toast.current.show({severity: 'success', summary: 'Successful', detail: 'Phone Deleted', life: 3000});
+        toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Phone Deleted', life: 3000 });
     };
 
     const findIndexById = (id) => {
@@ -151,7 +151,7 @@ export default function Phones() {
 
     const deleteSelectedPhones = () => {
         let _phones = phones.filter((val) => !selectedPhones.includes(val));
-        if(selectedPhones !== null) {
+        if (selectedPhones !== null) {
             let Phones = selectedPhones.map(phone => phone.id);
             removeManyPhones(Phones).then();
         }
@@ -159,12 +159,12 @@ export default function Phones() {
         setPhones(_phones);
         setDeletePhonesDialog(false);
         setSelectedPhones(null);
-        toast.current.show({severity: 'success', summary: 'Successful', detail: 'Phones Deleted', life: 3000});
+        toast.current.show({ severity: 'success', summary: 'Successful', detail: 'Phones Deleted', life: 3000 });
     };
 
     const onInputChange = (e, name) => {
         const val = (e.target && e.target.value) || '';
-        let _phone = {...phone};
+        let _phone = { ...phone };
         _phone[`${name}`] = val;
         setPhone(_phone);
     };
@@ -172,23 +172,23 @@ export default function Phones() {
     const leftToolbarTemplate = () => {
         return (
             <div className="flex flex-wrap gap-2">
-                <Button label="New" icon="pi pi-plus" severity="success" onClick={openNew}/>
+                <Button label="New" icon="pi pi-plus" severity="success" onClick={openNew} />
                 <Button label="Delete" icon="pi pi-trash" severity="danger" onClick={confirmDeleteSelected}
-                        disabled={!selectedPhones || !selectedPhones.length}/>
+                        disabled={!selectedPhones || !selectedPhones.length} />
             </div>
         );
     };
 
     const rightToolbarTemplate = () => {
-        return <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV}/>;
+        return <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />;
     };
 
     const actionBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editPhone(rowData)}/>
+                <Button icon="pi pi-pencil" rounded outlined className="mr-2" onClick={() => editPhone(rowData)} />
                 <Button icon="pi pi-trash" rounded outlined severity="danger"
-                        onClick={() => confirmDeletePhone(rowData)}/>
+                        onClick={() => confirmDeletePhone(rowData)} />
             </React.Fragment>
         );
     };
@@ -205,26 +205,26 @@ export default function Phones() {
 
     const phoneDialogFooter = (
         <React.Fragment>
-            <Button label="Cancel" icon="pi pi-times" outlined onClick={hideDialog}/>
-            <Button label="Save" icon="pi pi-check" onClick={savePhone}/>
+            <Button label="Cancel" icon="pi pi-times" outlined onClick={hideDialog} />
+            <Button label="Save" icon="pi pi-check" onClick={savePhone} />
         </React.Fragment>
     );
     const deletePhoneDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeletePhoneDialog}/>
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deletePhone}/>
+            <Button label="No" icon="pi pi-times" outlined onClick={hideDeletePhoneDialog} />
+            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deletePhone} />
         </React.Fragment>
     );
     const deletePhonesDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeletePhonesDialog}/>
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteSelectedPhones}/>
+            <Button label="No" icon="pi pi-times" outlined onClick={hideDeletePhonesDialog} />
+            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteSelectedPhones} />
         </React.Fragment>
     );
 
     return (
         <div>
-            <Toast ref={toast}/>
+            <Toast ref={toast} />
             <div className="card">
                 <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
                 <DataTable ref={dt} value={phones} selection={selectedPhones} showGridlines
@@ -234,14 +234,14 @@ export default function Phones() {
                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} phones"
                            globalFilter={globalFilter} header={header}>
                     <Column selectionMode="multiple" exportable={false}></Column>
-                    <Column field="name" header="Name" sortable style={{minWidth: '26rem'}}></Column>
-                    <Column field="phoneNumber" header="Phone Number" sortable style={{minWidth: '26rem'}}></Column>
+                    <Column field="name" header="Name" sortable style={{ minWidth: '26rem' }}></Column>
+                    <Column field="phoneNumber" header="Phone Number" sortable style={{ minWidth: '26rem' }}></Column>
                     <Column header="Action" body={actionBodyTemplate} exportable={false}
-                            style={{minWidth: '12rem'}}></Column>
+                            style={{ minWidth: '12rem' }}></Column>
                 </DataTable>
             </div>
 
-            <Dialog visible={phoneDialog} style={{width: '32rem'}} breakpoints={{'960px': '75vw', '641px': '90vw'}}
+            <Dialog visible={phoneDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }}
                     header="Phone Details" modal className="p-fluid" footer={phoneDialogFooter} onHide={hideDialog}>
                 <div className="field">
                     <label htmlFor="name" className="font-bold">
@@ -249,24 +249,16 @@ export default function Phones() {
                     </label>
                     <InputText id="name" value={phone.name}
                                onChange={(e) => onInputChange(e, 'name')} required
-                               autoFocus className={classNames({'p-invalid': submitted && !phone.name})}/>
+                               autoFocus className={classNames({ 'p-invalid': submitted && !phone.name })} />
                     {submitted && !phone.name && <small className="p-error">Name is required.</small>}
                 </div>
                 <div className="field">
-                    {/*<label htmlFor="phoneNumber" className="font-bold">*/}
-                    {/*    Phone number*/}
-                    {/*</label>*/}
-                    {/*<InputText id="phoneNumber" value={phone.phoneNumber}*/}
-                    {/*           onChange={(e) => onInputChange(e, 'phoneNumber')} required*/}
-                    {/*           className={classNames({'p-invalid': submitted && !phone.phoneNumber})}/>*/}
-                    {/*{submitted && !phone.phoneNumber && <small className="p-error">Phone number is required.</small>}*/}
-                    {/*<label htmlFor="phoneNumber" className="font-bold block mb-2">Phone number</label>*/}
                     <InputMask
                         id="phoneNumber"
                         value={phone.phoneNumber}
                         onChange={(e) => onInputChange(e, 'phoneNumber')}
                         required
-                        className={classNames({'p-invalid': submitted && !phone.phoneNumber})}
+                        className={classNames({ 'p-invalid': submitted && !phone.phoneNumber })}
                         mask="999-999-999"
                         placeholder="___-___-___">
                     </InputMask>
@@ -274,11 +266,11 @@ export default function Phones() {
                 </div>
             </Dialog>
 
-            <Dialog visible={deletePhoneDialog} style={{width: '32rem'}}
-                    breakpoints={{'960px': '75vw', '641px': '90vw'}} header="Confirm" modal
+            <Dialog visible={deletePhoneDialog} style={{ width: '32rem' }}
+                    breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal
                     footer={deletePhoneDialogFooter} onHide={hideDeletePhoneDialog}>
                 <div className="confirmation-content">
-                    <i className="pi pi-exclamation-triangle mr-3" style={{fontSize: '2rem'}}/>
+                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
                     {phone && (
                         <span>
                             Are you sure you want to delete <b>{phone.name}</b>?
@@ -287,11 +279,11 @@ export default function Phones() {
                 </div>
             </Dialog>
 
-            <Dialog visible={deletePhonesDialog} style={{width: '32rem'}}
-                    breakpoints={{'960px': '75vw', '641px': '90vw'}} header="Confirm" modal
+            <Dialog visible={deletePhonesDialog} style={{ width: '32rem' }}
+                    breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Confirm" modal
                     footer={deletePhonesDialogFooter} onHide={hideDeletePhonesDialog}>
                 <div className="confirmation-content">
-                    <i className="pi pi-exclamation-triangle mr-3" style={{fontSize: '2rem'}}/>
+                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
                     {phone && <span>Are you sure you want to delete the selected phones?</span>}
                 </div>
             </Dialog>
