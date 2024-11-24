@@ -37,7 +37,7 @@ This layer contains implemented database accesses, configurations and repositori
 
 ### Application Layer
 
-tbd
+In this case, this layer contains little, only DTOS for now.
 
 ### Web Layer
 
