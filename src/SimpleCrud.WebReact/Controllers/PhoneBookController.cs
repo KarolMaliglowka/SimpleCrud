@@ -112,11 +112,12 @@ public class PhoneBookController(IPhoneBookRepository phoneBookRepository) : Con
         };
     }
     
-    [HttpDelete("deleteMany/")]
+    [HttpDelete("deleteMany")]
     public async Task<ActionResult> DeleteMany(IEnumerable<Guid> phoneIds)
     {
         var phone = await phoneBookRepository.GetAllAsync();
-        var phonesToDelete = phone.Where(p => phoneIds.Any(ids => ids == p.Id));
+        var phonesToDelete = phone
+            .Where(p => phoneIds.Any(ids => ids == p.Id));
         if (phonesToDelete == null)
         {
             throw new NullReferenceException("No records");

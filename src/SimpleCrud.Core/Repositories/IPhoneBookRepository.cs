@@ -4,7 +4,7 @@ namespace SimpleCrud.Core.Repositories;
 
 public interface IPhoneBookRepository
 {
-    Task<IEnumerable<PhoneBook>> GetAllAsync();
+    Task<List<PhoneBook>> GetAllAsync();
     Task<PhoneBook> GetAsyncById(Guid id);
     Task AddAsync(PhoneBook phoneBook);
     Task Update(PhoneBook phoneBook);

@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, FormEvent } from 'react';
 import { classNames } from 'primereact/utils';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -36,6 +36,7 @@ export default function Phones() {
     const [globalFilter, setGlobalFilter] = useState(null);
     const toast = useRef(null);
     const dt = useRef(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     useEffect(() => {
         getALlPhones().then();
@@ -151,8 +152,10 @@ export default function Phones() {
 
     const deleteSelectedPhones = () => {
         let _phones = phones.filter((val) => !selectedPhones.includes(val));
+        console.log('-------------------', selectedPhones);
         if (selectedPhones !== null) {
             let Phones = selectedPhones.map(phone => phone.id);
+            console.log('id----------------', Phones);
             removeManyPhones(Phones).then();
         }
 
@@ -222,6 +225,36 @@ export default function Phones() {
         </React.Fragment>
     );
 
+
+
+
+    // async function onSubmit() {
+    //     //event.preventDefault()
+    //     setIsLoading(true) // Set loading to true when the request starts
+    //     console.log('testowanko');
+    //     try {
+    //         const formData = new FormData(event.currentTarget);
+    //         console.log('-----------formData', formData);
+    //
+    //
+    //         // const response = await fetch('/api/submit', {
+    //         //     method: 'POST',
+    //         //     body: formData,
+    //         // })
+    //
+    //         // Handle response if necessary
+    //         // const data = await response.json()
+    //         // ...
+    //     } catch (error) {
+    //         // Handle error if necessary
+    //         console.error(error)
+    //     } finally {
+    //         setIsLoading(false) // Set loading to false when the request completes
+    //     }
+    // }
+
+
+
     return (
         <div>
             <Toast ref={toast} />
@@ -264,6 +297,31 @@ export default function Phones() {
                     </InputMask>
                     {submitted && !phone.phoneNumber && <small className="p-error">Phone number is required.</small>}
                 </div>
+
+                {/*<form onSubmit={onSubmit}>*/}
+                {/*    <div className="field">*/}
+                {/*        <label htmlFor="name" className="font-bold">*/}
+                {/*            Name*/}
+                {/*        </label>*/}
+                {/*        <InputText id="name" value={phone.name}*/}
+                {/*                   onChange={(e) => onInputChange(e, 'name')} required*/}
+                {/*                   autoFocus className={classNames({ 'p-invalid': submitted && !phone.name })} />*/}
+                {/*        {submitted && !phone.name && <small className="p-error">Name is required.</small>}*/}
+                {/*    </div>*/}
+                {/*    <div className="field">*/}
+                {/*        <InputMask*/}
+                {/*            id="phoneNumber"*/}
+                {/*            value={phone.phoneNumber}*/}
+                {/*            onChange={(e) => onInputChange(e, 'phoneNumber')}*/}
+                {/*            required*/}
+                {/*            className={classNames({ 'p-invalid': submitted && !phone.phoneNumber })}*/}
+                {/*            mask="999-999-999"*/}
+                {/*            placeholder="___-___-___">*/}
+                {/*        </InputMask>*/}
+                {/*        {submitted && !phone.phoneNumber &&*/}
+                {/*            <small className="p-error">Phone number is required.</small>}*/}
+                {/*    </div>*/}
+                {/*</form>*/}
             </Dialog>
 
             <Dialog visible={deletePhoneDialog} style={{ width: '32rem' }}

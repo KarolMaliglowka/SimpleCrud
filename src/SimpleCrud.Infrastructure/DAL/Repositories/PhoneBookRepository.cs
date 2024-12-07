@@ -6,7 +6,7 @@ namespace SimpleCrud.Infrastructure.DAL.Repositories;
 
 public class PhoneBookRepository(SimpleCrudDbContext dbContext) : IPhoneBookRepository
 {
-    public async Task<IEnumerable<PhoneBook>> GetAllAsync() =>
+    public async Task<List<PhoneBook>> GetAllAsync() =>
         await dbContext.PhonesBooks
             .OrderBy(x => x.Name)
             .ToListAsync();
