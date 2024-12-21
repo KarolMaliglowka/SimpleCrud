@@ -152,10 +152,8 @@ export default function Phones() {
 
     const deleteSelectedPhones = () => {
         let _phones = phones.filter((val) => !selectedPhones.includes(val));
-        console.log('-------------------', selectedPhones);
         if (selectedPhones !== null) {
             let Phones = selectedPhones.map(phone => phone.id);
-            console.log('id----------------', Phones);
             removeManyPhones(Phones).then();
         }
 
@@ -225,9 +223,6 @@ export default function Phones() {
         </React.Fragment>
     );
 
-
-
-
     // async function onSubmit() {
     //     //event.preventDefault()
     //     setIsLoading(true) // Set loading to true when the request starts
@@ -252,8 +247,6 @@ export default function Phones() {
     //         setIsLoading(false) // Set loading to false when the request completes
     //     }
     // }
-
-
 
     return (
         <div>
