@@ -3,7 +3,6 @@ using SimpleCrud.Application.Dtos;
 using SimpleCrud.Core.Entities;
 using SimpleCrud.Core.Repositories;
 
-
 namespace SimpleCrud.Web.Controllers;
 
 [ApiController]
@@ -25,7 +24,7 @@ public class PhoneBookController(IPhoneBookRepository phoneBookRepository) : Con
             .GetAsyncById(phoneId);
         if (phone == null)
         {
-            throw new NullReferenceException("No record");
+            throw new NullReferenceException("No record in database :/");
         }
 
         return new PhoneDto
@@ -52,8 +51,9 @@ public class PhoneBookController(IPhoneBookRepository phoneBookRepository) : Con
             .GetAsyncById(command.Id);
         if (phone == null)
         {
-            throw new NullReferenceException("No record");
+            throw new NullReferenceException("No record in database :/");
         }
+
         phone.SetPhoneNumber(command.PhoneNumber);
         phone.SetName(command.Name);
 
@@ -69,7 +69,7 @@ public class PhoneBookController(IPhoneBookRepository phoneBookRepository) : Con
             .GetAsyncById(phoneId);
         if (phone == null)
         {
-            throw new NullReferenceException("No record");
+            throw new NullReferenceException("No record in database :/");
         }
 
         await phoneBookRepository
@@ -84,7 +84,7 @@ public class PhoneBookController(IPhoneBookRepository phoneBookRepository) : Con
             .GetAsyncByPhoneNumber(phoneNumber);
         if (phone == null)
         {
-            throw new NullReferenceException("No record");
+            throw new NullReferenceException("No record in database :/");
         }
 
         return new PhoneDto
@@ -94,7 +94,7 @@ public class PhoneBookController(IPhoneBookRepository phoneBookRepository) : Con
             PhoneNumber = phone.PhoneNumber
         };
     }
-    
+
     [HttpGet("getByPhoneName/{phoneName}")]
     public async Task<ActionResult<PhoneDto>> GetByPhoneName(string phoneName)
     {
@@ -102,7 +102,7 @@ public class PhoneBookController(IPhoneBookRepository phoneBookRepository) : Con
             .GetAsyncByPhoneName(phoneName);
         if (phone == null)
         {
-            throw new NullReferenceException("No record");
+            throw new NullReferenceException("No record in database :/");
         }
 
         return new PhoneDto
@@ -112,16 +112,17 @@ public class PhoneBookController(IPhoneBookRepository phoneBookRepository) : Con
             PhoneNumber = phone.PhoneNumber
         };
     }
-    
+
     [HttpDelete("deleteMany")]
     public async Task<ActionResult> DeleteMany(IEnumerable<Guid> phoneIds)
     {
         var phone = await phoneBookRepository.GetAllAsync();
         var phonesToDelete = phone
-            .Where(p => phoneIds.Any(ids => ids == p.Id));
+            .Where(p =>
+                phoneIds.Any(ids => ids == p.Id));
         if (phonesToDelete == null)
         {
-            throw new NullReferenceException("No records");
+            throw new NullReferenceException("No records in database :/");
         }
 
         await phoneBookRepository.RemoveMany(phonesToDelete);
