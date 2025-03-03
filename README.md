@@ -41,10 +41,11 @@ In this case, this layer contains little, only DTOS for now.
 
 ### Web Layer
 
-The application uses React NEXT.js, to learn more about Next.js, take a look at the following resources:
+The application uses Angular and TypeScript, to learn more about these technologies, take a look at the following resources:
 
--   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   [Angular Documentation](https://angular.dev/overview) - learn about Angular features.
+-   [Learn TypeScript](https://www.typescriptlang.org/)
+-   [PrimeNG](https://primeng.org/)
 
 ## Tests
 
