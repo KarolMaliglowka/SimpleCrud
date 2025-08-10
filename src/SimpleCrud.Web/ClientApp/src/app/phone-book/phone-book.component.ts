@@ -12,29 +12,31 @@
 // }
 
 
-
-
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {ConfirmationService, MessageService} from 'primeng/api';
 // import { Product } from '@/domain/product';
-import { PhoneBookService } from './phone-book.service';
-import { TableModule } from 'primeng/table';
-import { Dialog } from 'primeng/dialog';
-import { Ripple } from 'primeng/ripple';
-import { ButtonModule } from 'primeng/button';
-import { ToastModule } from 'primeng/toast';
-import { ToolbarModule } from 'primeng/toolbar';
-import { ConfirmDialog } from 'primeng/confirmdialog';
-import { InputTextModule } from 'primeng/inputtext';
-import { CommonModule } from '@angular/common';
-import { FileUpload } from 'primeng/fileupload';
-import { Tag } from 'primeng/tag';
-import { RadioButton } from 'primeng/radiobutton';
-import { Rating } from 'primeng/rating';
-import { FormsModule } from '@angular/forms';
-import { InputNumber } from 'primeng/inputnumber';
-import { Table } from 'primeng/table';
-import { DropdownModule } from 'primeng/dropdown';
+import {PhoneBookService} from './phone-book.service';
+import {TableModule} from 'primeng/table';
+import {Dialog} from 'primeng/dialog';
+import {Ripple} from 'primeng/ripple';
+import {ButtonModule} from 'primeng/button';
+import {ToastModule} from 'primeng/toast';
+import {ToolbarModule} from 'primeng/toolbar';
+import {ConfirmDialog} from 'primeng/confirmdialog';
+import {InputTextModule} from 'primeng/inputtext';
+import {CommonModule} from '@angular/common';
+import {FileUpload} from 'primeng/fileupload';
+import {Tag} from 'primeng/tag';
+import {RadioButton} from 'primeng/radiobutton';
+import {Rating} from 'primeng/rating';
+import {FormsModule} from '@angular/forms';
+import {InputNumber} from 'primeng/inputnumber';
+import {Table} from 'primeng/table';
+import {DropdownModule} from 'primeng/dropdown';
+import {PhoneBook} from "../models/PhoneBook";
+import {SelectModule} from "primeng/select";
+import {IconFieldModule} from "primeng/iconfield";
+import {InputIconModule} from "primeng/inputicon";
 
 interface Column {
     field: string;
@@ -52,17 +54,17 @@ interface ExportColumn {
     templateUrl: './phone-book.component.html',
     styleUrl: './phone-book.component.scss',
     standalone: true,
-    imports: [TableModule, Dialog, Ripple, SelectModule, ToastModule, ToolbarModule, ConfirmDialog, InputTextModule,  CommonModule, FileUpload, DropdownModule, Tag, RadioButton, Rating, InputTextModule, FormsModule, InputNumber, IconFieldModule, InputIconModule],
+    imports: [TableModule, Dialog, Ripple, SelectModule, ToastModule, ToolbarModule, ConfirmDialog, InputTextModule, CommonModule, FileUpload, DropdownModule, Tag, RadioButton, Rating, InputTextModule, FormsModule, InputNumber, IconFieldModule, InputIconModule],
     providers: [MessageService, ConfirmationService, PhoneBookService],
     styles: [
         `:host ::ng-deep .p-dialog .product-image {
-            width: 150px;
-            margin: 0 auto 2rem auto;
-            display: block;
+          width: 150px;
+          margin: 0 auto 2rem auto;
+          display: block;
         }`
     ]
 })
-export class PhoneBookComponent implements OnInit{
+export class PhoneBookComponent  {
     productDialog: boolean = false;
 
     phoneBooks!: PhoneBook[];
@@ -86,43 +88,38 @@ export class PhoneBookComponent implements OnInit{
         private messageService: MessageService,
         private confirmationService: ConfirmationService,
         private cd: ChangeDetectorRef
-    ) {}
+    ) {
+    }
 
     exportCSV() {
         this.dt.exportCSV();
     }
 
-    loadDemoData() {
-        this.phoneBookService.getProducts().then((data) => {
-            this.phoneBooks = data;
-            this.cd.markForCheck();
-        });
+    // loadDemoData() {
+    //     this.phoneBookService.getPhoneBooks().then((data) => {
+    //         this.phoneBooks = data;
+    //         this.cd.markForCheck();
+    //     });
+    //
+    //     this.cols = [
+    //         {field: 'code', header: 'Code', customExportHeader: 'Product Code'},
+    //         {field: 'name', header: 'Name'},
+    //         {field: 'image', header: 'Image'},
+    //         {field: 'price', header: 'Price'},
+    //         {field: 'category', header: 'Category'}
+    //     ];
+    //
+    //     this.exportColumns = this.cols.map((col) => ({title: col.header, dataKey: col.field}));
+    // }
 
-        this.statuses = [
-            { label: 'INSTOCK', value: 'instock' },
-            { label: 'LOWSTOCK', value: 'lowstock' },
-            { label: 'OUTOFSTOCK', value: 'outofstock' }
-        ];
-
-        this.cols = [
-            { field: 'code', header: 'Code', customExportHeader: 'Product Code' },
-            { field: 'name', header: 'Name' },
-            { field: 'image', header: 'Image' },
-            { field: 'price', header: 'Price' },
-            { field: 'category', header: 'Category' }
-        ];
-
-        this.exportColumns = this.cols.map((col) => ({ title: col.header, dataKey: col.field }));
-    }
-
-    openNew() {
-        this.phoneBook = {};
-        this.submitted = false;
-        this.phoneBookDialog = true;
-    }
+    // openNew() {
+    //     this.phoneBook = {};
+    //     this.submitted = false;
+    //     //this.phoneBookDialog = true;
+    // }
 
     editPhoneBook(phoneBook: PhoneBook) {
-        this.phoneBook = { ...phoneBook };
+        this.phoneBook = {...phoneBook};
         this.productDialog = true;
     }
 
@@ -156,7 +153,7 @@ export class PhoneBookComponent implements OnInit{
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
                 this.phoneBooks = this.phoneBooks.filter((val) => val.id !== phoneBook.id);
-                this.phoneBook = {};
+                //this.phoneBook = {};
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
@@ -179,26 +176,6 @@ export class PhoneBookComponent implements OnInit{
         return index;
     }
 
-    createId(): string {
-        let id = '';
-        var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (var i = 0; i < 5; i++) {
-            id += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        return id;
-    }
-
-    getSeverity(status: string) {
-        switch (status) {
-            case 'INSTOCK':
-                return 'success';
-            case 'LOWSTOCK':
-                return 'warning';
-            case 'OUTOFSTOCK':
-                return 'danger';
-        }
-    }
-
     savePhoneBook() {
         this.submitted = true;
 
@@ -212,8 +189,6 @@ export class PhoneBookComponent implements OnInit{
                     life: 3000
                 });
             } else {
-                this.phoneBook.id = this.createId();
-                this.phoneBook.image = 'phoneBook-placeholder.svg';
                 this.phoneBooks.push(this.phoneBook);
                 this.messageService.add({
                     severity: 'success',
@@ -224,8 +199,8 @@ export class PhoneBookComponent implements OnInit{
             }
 
             this.phoneBooks = [...this.phoneBooks];
-            this.phoneBookDialog = false;
-            this.phoneBook = {};
+            //this.phoneBookDialog = false;
+            //this.phoneBook = {};
         }
     }
 }

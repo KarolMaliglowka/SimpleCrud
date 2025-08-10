@@ -47,12 +47,11 @@ The application uses Angular and TypeScript, to learn more about these technolog
 -   [Learn TypeScript](https://www.typescriptlang.org/)
 -   [PrimeNG](https://primeng.org/)
 
-
 ## Tests
 
 ### Unit tests
 
-Tests for the PhoneBook model are added, using [NUnit](https://nunit.org/) and [Fluent Assertions](https://fluentassertions.com/)
+Tests for the PhoneBook model are added, using [NUnit](https://nunit.org/) and [Fluent Assertions](https://fluentassertions.com/).
 
 ## Work with application
 
