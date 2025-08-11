@@ -8,10 +8,15 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.8"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\SimpleCrud.Application\SimpleCrud.Application.csproj" />
+      <ProjectReference Include="..\SimpleCrud.Infrastructure\SimpleCrud.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
