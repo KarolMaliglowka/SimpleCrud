@@ -13,15 +13,15 @@ builder.Services
     .AddInfrastructure(builder.Configuration)
     .AddApplication();
 
-builder.Services
-    .AddCors(options => options.AddPolicy("ApiCorsPolicy", corsPolicyBuilder =>
-    {
-        corsPolicyBuilder
-            .WithOrigins("http://localhost:4200")
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials();
-    }));
+// builder.Services
+//     .AddCors(options => options.AddPolicy("ApiCorsPolicy", corsPolicyBuilder =>
+//     {
+//         corsPolicyBuilder
+//             .WithOrigins("http://localhost:4200")
+//             .AllowAnyMethod()
+//             .AllowAnyHeader()
+//             .AllowCredentials();
+//     }));
 
 var app = builder.Build();
 
