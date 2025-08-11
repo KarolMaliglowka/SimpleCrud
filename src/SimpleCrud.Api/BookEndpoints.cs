@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using SimpleCrud.Application.Dtos;
 using SimpleCrud.Core.Entities;
 using SimpleCrud.Core.Repositories;
@@ -65,14 +66,14 @@ public static class BookEndpoints
             });
         });
 
-        app.MapPost("create", async (IPhoneBookRepository phoneBookRepository, PhoneDto command) =>
+        app.MapPost("create", async (IPhoneBookRepository phoneBookRepository,[FromBody] PhoneDto command) =>
         {
             var newPhone = new PhoneBook(command.PhoneNumber, command.Name);
             await phoneBookRepository.AddAsync(newPhone);
             return Results.Created();
         });
 
-        app.MapPatch("update", async (IPhoneBookRepository phoneBookRepository, PhoneDto command) =>
+        app.MapPatch("update", async (IPhoneBookRepository phoneBookRepository,[FromBody] PhoneDto command) =>
         {
             var phone = await phoneBookRepository.GetAsyncById(command.Id);
             if (phone == null)
