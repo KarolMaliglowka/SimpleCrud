@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrud.Tests.Unit", "te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrud.Web", "src\SimpleCrud.Web\SimpleCrud.Web.csproj", "{FF454C08-D45B-4DA5-9160-99628471167A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrud.Api", "SimpleCrud.Api\SimpleCrud.Api.csproj", "{F6DF347D-5405-4874-8CE1-F60C68A2F402}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrud.Api", "src\SimpleCrud.Api\SimpleCrud.Api.csproj", "{F6DF347D-5405-4874-8CE1-F60C68A2F402}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
