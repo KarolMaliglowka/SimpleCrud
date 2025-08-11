@@ -12,7 +12,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\SimpleCrud.Application\SimpleCrud.Application.csproj" />
-      <ProjectReference Include="..\src\SimpleCrud.Application\SimpleCrud.Application.csproj" />
     </ItemGroup>
 
 </Project>
