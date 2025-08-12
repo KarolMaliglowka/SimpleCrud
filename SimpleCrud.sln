@@ -5,17 +5,15 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3F5C1B5D-CA14-431F-993D-028F337C261E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrud.Core", "src\SimpleCrud.Core\SimpleCrud.Core.csproj", "{DEC75218-7818-4DF6-B3A2-5402C501D6F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrud.Core", "src\Backend\SimpleCrud.Core\SimpleCrud.Core.csproj", "{DEC75218-7818-4DF6-B3A2-5402C501D6F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrud.Infrastructure", "src\SimpleCrud.Infrastructure\SimpleCrud.Infrastructure.csproj", "{3000E8EE-A8BE-4C52-B294-B2F0B1B4384D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrud.Infrastructure", "src\Backend\SimpleCrud.Infrastructure\SimpleCrud.Infrastructure.csproj", "{3000E8EE-A8BE-4C52-B294-B2F0B1B4384D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrud.Application", "src\SimpleCrud.Application\SimpleCrud.Application.csproj", "{4E460EAC-C746-4CE7-AE2F-81A03B1F98A2}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6B924438-1157-406E-BA75-7734F05245BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrud.Application", "src\Backend\SimpleCrud.Application\SimpleCrud.Application.csproj", "{4E460EAC-C746-4CE7-AE2F-81A03B1F98A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrud.Tests.Unit", "tests\SimpleCrud.Tests.Unit\SimpleCrud.Tests.Unit.csproj", "{0C5014E8-8735-47E1-985E-371F88A245E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrud.Api", "src\SimpleCrud.Api\SimpleCrud.Api.csproj", "{F6DF347D-5405-4874-8CE1-F60C68A2F402}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrud.Api", "src\Backend\SimpleCrud.Api\SimpleCrud.Api.csproj", "{F6DF347D-5405-4874-8CE1-F60C68A2F402}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,7 +49,7 @@ Global
 		{DEC75218-7818-4DF6-B3A2-5402C501D6F9} = {3F5C1B5D-CA14-431F-993D-028F337C261E}
 		{3000E8EE-A8BE-4C52-B294-B2F0B1B4384D} = {3F5C1B5D-CA14-431F-993D-028F337C261E}
 		{4E460EAC-C746-4CE7-AE2F-81A03B1F98A2} = {3F5C1B5D-CA14-431F-993D-028F337C261E}
-		{0C5014E8-8735-47E1-985E-371F88A245E8} = {6B924438-1157-406E-BA75-7734F05245BF}
 		{F6DF347D-5405-4874-8CE1-F60C68A2F402} = {3F5C1B5D-CA14-431F-993D-028F337C261E}
+		{0C5014E8-8735-47E1-985E-371F88A245E8} = {3F5C1B5D-CA14-431F-993D-028F337C261E}
 	EndGlobalSection
 EndGlobal
