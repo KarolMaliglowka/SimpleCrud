@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Backend\SimpleCrud.Core\SimpleCrud.Core.csproj" />
     <ProjectReference Include="..\..\src\SimpleCrud.Core\SimpleCrud.Core.csproj" />
   </ItemGroup>
 
