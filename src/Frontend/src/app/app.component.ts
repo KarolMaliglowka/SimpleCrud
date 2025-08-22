@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
   }
 
   openNew() {
-    this.phone = { id: '', name: '', phoneNumber: '' };
+    this.phone = { id: '00000000-0000-0000-0000-000000000000', name: '', phoneNumber: '' };
     this.submitted = false;
     this.phoneDialog = true;
     this.isEdit = false;
@@ -83,7 +83,7 @@ export class AppComponent implements OnInit {
 
   savePhone() {
     this.submitted = true;
-
+    console.log(this.phone);
     if (this.phone.name && this.phone.phoneNumber) {
       if (this.isEdit) {
         this.phoneService.update(this.phone).subscribe(() => {
