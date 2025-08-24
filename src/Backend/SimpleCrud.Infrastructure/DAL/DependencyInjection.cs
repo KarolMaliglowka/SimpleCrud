@@ -9,7 +9,8 @@ internal static class DependencyInjection
     public static IServiceCollection AddPostgres(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetSection("postgres:connectionString").Value;
-        services.AddDbContext<SimpleCrudDbContext>(x => x.UseNpgsql(connectionString));
+        services.AddDbContext<SimpleCrudDbContext>(x => 
+            x.UseNpgsql(connectionString));
 
         return services;
     }

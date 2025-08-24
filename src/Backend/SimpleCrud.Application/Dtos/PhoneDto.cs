@@ -5,4 +5,5 @@ public record PhoneDto
     public Guid Id { get; init; }
     public string? Name { get; init; }
     public string? PhoneNumber { get; init; }
+    public string? Description { get; set; }
 };

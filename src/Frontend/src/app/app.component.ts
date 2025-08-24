@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PhoneService } from './services/phone.service';
-import { PhoneDto } from './models/phone.model';
+import { Phone } from './models/phone.model';
 import { MessageService, ConfirmationService } from 'primeng/api';
+import { CommonModule } from '@angular/common';
 // PrimeNG
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -17,11 +18,12 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
+  styleUrl: 'app.component.css',
   providers: [MessageService, ConfirmationService],
   imports: [
     //HttpClientModule,
     FormsModule,
-
+    CommonModule,
     // 🔽 wszystkie używane moduły PrimeNG muszą tu być
     TableModule,
     ButtonModule,
@@ -33,9 +35,9 @@ import { FormsModule } from '@angular/forms';
   ]
 })
 export class AppComponent implements OnInit {
-  phones!: PhoneDto[];
+  phones!: Phone[];
   phoneDialog: boolean = false;
-  phone!: PhoneDto;
+  phone!: Phone;
   submitted: boolean = false;
   isEdit: boolean = false;
 
@@ -56,23 +58,23 @@ export class AppComponent implements OnInit {
   }
 
   openNew() {
-    this.phone = { id: '00000000-0000-0000-0000-000000000000', name: '', phoneNumber: '' };
+    this.phone = {};
     this.submitted = false;
     this.phoneDialog = true;
     this.isEdit = false;
   }
 
-  editPhone(phone: PhoneDto) {
+  editPhone(phone: Phone) {
     this.phone = { ...phone };
     this.phoneDialog = true;
     this.isEdit = true;
   }
 
-  deletePhone(phone: PhoneDto) {
+  deletePhone(phone: Phone) {
     this.confirmationService.confirm({
       message: `Na pewno chcesz usunąć ${phone.name}?`,
       accept: () => {
-        this.phoneService.delete(phone.id).subscribe(() => {
+        this.phoneService.delete(phone).subscribe(() => {
           this.messageService.add({ severity: 'success', summary: 'Usunięto', detail: phone.name });
           this.loadPhones();
         });
@@ -97,4 +99,5 @@ export class AppComponent implements OnInit {
       this.phoneDialog = false;
     }
   }
+  hideDialog(){}
 }

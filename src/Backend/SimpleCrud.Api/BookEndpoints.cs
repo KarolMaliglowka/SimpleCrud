@@ -30,7 +30,8 @@ public static class BookEndpoints
             {
                 Id = phone.Id,
                 Name = phone.Name,
-                PhoneNumber = phone.PhoneNumber
+                PhoneNumber = phone.PhoneNumber,
+                Description = phone.Description
             });
         });
         
@@ -46,7 +47,8 @@ public static class BookEndpoints
             {
                 Id = phone.Id,
                 Name = phone.Name,
-                PhoneNumber = phone.PhoneNumber
+                PhoneNumber = phone.PhoneNumber,
+                Description = phone.Description
             });
         });
         
@@ -62,13 +64,14 @@ public static class BookEndpoints
             {
                 Id = phone.Id,
                 Name = phone.Name,
-                PhoneNumber = phone.PhoneNumber
+                PhoneNumber = phone.PhoneNumber,
+                Description = phone.Description
             });
         });
 
         app.MapPost("create", async (IPhoneBookRepository phoneBookRepository,[FromBody] PhoneDto command) =>
         {
-            var newPhone = new PhoneBook(command.PhoneNumber, command.Name);
+            var newPhone = new PhoneBook(command.PhoneNumber, command.Name, command.Description);
             await phoneBookRepository.AddAsync(newPhone);
             return Results.Created();
         });
@@ -82,6 +85,7 @@ public static class BookEndpoints
             }
             phone.SetPhoneNumber(command.PhoneNumber);
             phone.SetName(command.Name);
+            phone.SetDescription(command.Description);
             await phoneBookRepository.Update(phone);
             return Results.Ok();
         });
