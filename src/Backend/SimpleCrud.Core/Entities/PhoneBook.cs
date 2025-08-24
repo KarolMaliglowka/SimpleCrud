@@ -10,15 +10,17 @@ public partial class PhoneBook
     {
     }
 
-    public PhoneBook(string phoneNumber, string name)
+    public PhoneBook(string phoneNumber, string name, string description = null)
     {
         SetPhoneNumber(phoneNumber);
         SetName(name);
+        SetDescription(description);
     }
 
     public Guid Id { get; init; } = Guid.NewGuid();
     public string PhoneNumber { get; set; }
     public string Name { get; set; }
+    public string Description { get; set; }
 
     public void SetPhoneNumber(string phoneNumber)
     {
@@ -46,10 +48,12 @@ public partial class PhoneBook
         {
             throw new ArgumentNullException(nameof(name), "Name cannot be empty.");
         }
+
         if (name.Length > 100)
         {
             throw new ArgumentException("Name cannot be more than 100 characters.", nameof(name));
         }
+
         if (!PhoneNameFormatRegex().IsMatch(name))
         {
             throw new ArgumentException("Name can only contain letters and spaces.", nameof(name));
@@ -57,6 +61,20 @@ public partial class PhoneBook
 
         Name = name;
     }
+
+    public void SetDescription(string description)
+    {
+        if (!string.IsNullOrEmpty(description))
+        {
+            if (description.Length > 200)
+            {
+                throw new ArgumentException("Description cannot be more than 200 characters.", nameof(description));
+            }
+        }
+
+        Description = description;
+    }
+
 
     [GeneratedRegex(@"^[a-zA-Z0-9\s]+$")]
     private static partial Regex PhoneNameFormatRegex();

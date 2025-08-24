@@ -1,5 +1,4 @@
-<div style="align-self: center;">
-<div class="card" style="width: 100rem; align-content: center">
+<div class="card">
   <p-toolbar class="mb-6">
     <ng-template #start>
       <p-button label="New" icon="pi pi-plus" class="mr-2" (onClick)="openNew()" />
@@ -10,7 +9,7 @@
     [value]="phones"
     [rows]="10"
     [paginator]="true"
-    [tableStyle]="{ 'min-width': '75rem'}"
+    [tableStyle]="{ 'min-width': '100rem'}"
     [rowHover]="true"
     dataKey="id"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -18,36 +17,42 @@
   >
     <ng-template #caption>
       <div class="flex items-center justify-between">
-        <h5 class="m-0">Manage phones</h5>
+        <h3 class="m-0">Manage phones</h3>
       </div>
     </ng-template>
     <ng-template #header>
       <tr>
-        <th pSortableColumn="name" style="min-width:16rem">
+        <th pSortableColumn="name" style="min-width:20rem">
           <div class="flex items-center gap-2">
             Name
             <p-sortIcon field="name" />
           </div>
         </th>
-        <th pSortableColumn="phoneNumber" style="min-width:16rem">
+        <th pSortableColumn="phoneNumber" style="min-width:15rem">
           <div class="flex items-center gap-2">
             Phone number
             <p-sortIcon field="phoneNumber" />
           </div>
         </th>
-        <th style="min-width: 12rem">
+        <th pSortableColumn="description" style="min-width:40rem">
+          <div class="flex items-center gap-2">
+            Description
+            <p-sortIcon field="description" />
+          </div>
+        </th>
+        <th style="min-width: 5rem">
           <div class="flex items-center gap-2">
             Action
           </div>
         </th>
 
-        <th style="min-width: 12rem"></th>
       </tr>
     </ng-template>
     <ng-template #body let-phone>
       <tr>
         <td style="min-width: 12rem">{{ phone.name }}</td>
         <td style="min-width: 16rem">{{ phone.phoneNumber }}</td>
+        <td style="min-width: 16rem">{{ phone.description }}</td>
         <td>
           <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editPhone(phone)" />
           <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deletePhone(phone)" />
@@ -68,16 +73,18 @@
           <label for="phoneNumber" class="block font-bold mb-3">phoneNumber</label>
           <textarea id="phoneNumber" pTextarea [(ngModel)]="phone.phoneNumber" required rows="3" cols="20" fluid></textarea>
         </div>
+        <div>
+          <label for="description" class="block font-bold mb-3">description</label>
+          <textarea id="description" pTextarea [(ngModel)]="phone.description" required rows="3" cols="20" fluid></textarea>
+        </div>
       </div>
     </ng-template>
 
     <ng-template #footer>
-<!--      <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />-->
+      <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />
       <p-button label="Save" icon="pi pi-check" (click)="savePhone()" />
     </ng-template>
   </p-dialog>
 
   <p-confirmDialog [style]="{ width: '450px' }" />
 </div>
-</div>
-

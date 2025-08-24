@@ -1,5 +1,6 @@
-﻿export interface PhoneDto {
-  id: string;
-  name: string;
-  phoneNumber: string;
+﻿export interface Phone {
+  id?: string;
+  name?: string;
+  phoneNumber?: string;
+  description?: string;
 }
