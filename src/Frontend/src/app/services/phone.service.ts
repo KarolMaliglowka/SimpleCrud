@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { PhoneDto } from '../models/phone.model';
+import { Phone } from '../models/phone.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,24 +11,23 @@ export class PhoneService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<PhoneDto[]> {
-    console.log('trsttstss', this.apiUrl);
-    return this.http.get<PhoneDto[]>(`${this.apiUrl}`);
+  getAll(): Observable<Phone[]> {
+    return this.http.get<Phone[]>(`${this.apiUrl}`);
   }
 
-  getById(id: string): Observable<PhoneDto> {
-    return this.http.get<PhoneDto>(`${this.apiUrl}/getById/${id}`);
+  getById(id: string): Observable<Phone> {
+    return this.http.get<Phone>(`${this.apiUrl}/getById/${id}`);
   }
 
-  create(phone: PhoneDto): Observable<any> {
+  create(phone: Phone): Observable<any> {
     return this.http.post(`${this.apiUrl}/create`, phone);
   }
 
-  update(phone: PhoneDto): Observable<any> {
+  update(phone: Phone): Observable<any> {
     return this.http.patch(`${this.apiUrl}/update`, phone);
   }
 
-  delete(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/delete/${id}`);
+  delete(phone: Phone): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/delete/${phone.id}`);
   }
 }
