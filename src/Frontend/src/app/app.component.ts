@@ -12,14 +12,14 @@ import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+//import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  templateUrl: 'app.component.html',
   providers: [MessageService, ConfirmationService],
   imports: [
-    HttpClientModule,
+    //HttpClientModule,
     FormsModule,
 
     // 🔽 wszystkie używane moduły PrimeNG muszą tu być
@@ -33,9 +33,9 @@ import { HttpClientModule } from '@angular/common/http';
   ]
 })
 export class AppComponent implements OnInit {
-  phones: PhoneDto[] = [];
+  phones!: PhoneDto[];
   phoneDialog: boolean = false;
-  phone: PhoneDto = { id: '', name: '', phoneNumber: '' };
+  phone!: PhoneDto;
   submitted: boolean = false;
   isEdit: boolean = false;
 
@@ -50,7 +50,6 @@ export class AppComponent implements OnInit {
   }
 
   loadPhones() {
-    console.log('pobieram dane');
     this.phoneService.getAll().subscribe(data => {
       this.phones = data;
     });
@@ -83,7 +82,6 @@ export class AppComponent implements OnInit {
 
   savePhone() {
     this.submitted = true;
-    console.log(this.phone);
     if (this.phone.name && this.phone.phoneNumber) {
       if (this.isEdit) {
         this.phoneService.update(this.phone).subscribe(() => {
