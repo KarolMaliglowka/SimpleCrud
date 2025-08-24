@@ -1,45 +1,83 @@
-<p-toolbar>
-  <div class="p-toolbar-group-left">
-    <button pButton label="Dodaj" icon="pi pi-plus" (click)="openNew()"></button>
-  </div>
-</p-toolbar>
+<div style="align-self: center;">
+<div class="card" style="width: 100rem; align-content: center">
+  <p-toolbar class="mb-6">
+    <ng-template #start>
+      <p-button label="New" icon="pi pi-plus" class="mr-2" (onClick)="openNew()" />
+    </ng-template>
+  </p-toolbar>
+  <p-table
+    #dt
+    [value]="phones"
+    [rows]="10"
+    [paginator]="true"
+    [tableStyle]="{ 'min-width': '75rem'}"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template #caption>
+      <div class="flex items-center justify-between">
+        <h5 class="m-0">Manage phones</h5>
+      </div>
+    </ng-template>
+    <ng-template #header>
+      <tr>
+        <th pSortableColumn="name" style="min-width:16rem">
+          <div class="flex items-center gap-2">
+            Name
+            <p-sortIcon field="name" />
+          </div>
+        </th>
+        <th pSortableColumn="phoneNumber" style="min-width:16rem">
+          <div class="flex items-center gap-2">
+            Phone number
+            <p-sortIcon field="phoneNumber" />
+          </div>
+        </th>
+        <th style="min-width: 12rem">
+          <div class="flex items-center gap-2">
+            Action
+          </div>
+        </th>
 
-<p-table [value]="phones" responsiveLayout="scroll">
-  <ng-template pTemplate="header">
-    <tr>
-      <th>Imię</th>
-      <th>Numer telefonu</th>
-      <th>Akcje</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-phone>
-    <tr>
-      <td>{{ phone.name }}</td>
-      <td>{{ phone.phoneNumber }}</td>
-      <td>
-        <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
-                (click)="editPhone(phone)"></button>
-        <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger"
-                (click)="deletePhone(phone)"></button>
-      </td>
-    </tr>
-  </ng-template>
-</p-table>
+        <th style="min-width: 12rem"></th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-phone>
+      <tr>
+        <td style="min-width: 12rem">{{ phone.name }}</td>
+        <td style="min-width: 16rem">{{ phone.phoneNumber }}</td>
+        <td>
+          <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true" (click)="editPhone(phone)" />
+          <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true" (click)="deletePhone(phone)" />
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 
-<p-dialog header="{{isEdit ? 'Edytuj kontakt' : 'Nowy kontakt'}}" [(visible)]="phoneDialog" [modal]="true">
-  <div class="p-fluid">
-    <div class="field">
-      <label>Imię</label>
-      <input pInputText [(ngModel)]="phone.name" required />
-    </div>
-    <div class="field">
-      <label>Numer telefonu</label>
-      <input pInputText [(ngModel)]="phone.phoneNumber" required />
-    </div>
-  </div>
-  <footer>
-    <button pButton label="Zapisz" (click)="savePhone()"></button>
-  </footer>
-</p-dialog>
+  <p-dialog [(visible)]="phoneDialog" [style]="{ width: '450px' }" header="Product Details" [modal]="true">
+    <ng-template #content>
+      <div class="flex flex-col gap-6">
+            <div>
+          <label for="name" class="block font-bold mb-3">Name</label>
+          <input type="text" pInputText id="name" [(ngModel)]="phone.name" required autofocus fluid />
+          <small class="text-red-500" *ngIf="submitted && !phone.name">Name is required.</small>
+        </div>
+        <div>
+          <label for="phoneNumber" class="block font-bold mb-3">phoneNumber</label>
+          <textarea id="phoneNumber" pTextarea [(ngModel)]="phone.phoneNumber" required rows="3" cols="20" fluid></textarea>
+        </div>
+      </div>
+    </ng-template>
 
+    <ng-template #footer>
+<!--      <p-button label="Cancel" icon="pi pi-times" text (click)="hideDialog()" />-->
+      <p-button label="Save" icon="pi pi-check" (click)="savePhone()" />
+    </ng-template>
+  </p-dialog>
+
+  <p-confirmDialog [style]="{ width: '450px' }" />
+</div>
+</div>
 
