@@ -5,12 +5,13 @@ using SimpleCrud.Core.Repositories;
 
 namespace SimpleCrud.Api;
 
-public static class BookEndpoints
+public static class PhoneEndpoints
 {
     public static void MapBookEndpoints(this WebApplication app)
     {
         app.MapGet("", async (IPhoneBookRepository phoneBookRepository) =>
         {
+            //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
             var getAllAsync = (await phoneBookRepository.GetAllAsync())
                 .ToList();
 
@@ -21,6 +22,7 @@ public static class BookEndpoints
 
         app.MapGet("getById/{phoneId:guid}", async (IPhoneBookRepository phoneBookRepository, Guid phoneId) =>
         {
+            //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
             var phone = await phoneBookRepository
                 .GetAsyncById(phoneId);
             return phone != null
@@ -37,6 +39,7 @@ public static class BookEndpoints
         app.MapGet("getByPhoneNumber/{phoneNumber}",
             async (IPhoneBookRepository phoneBookRepository, string phoneNumber) =>
             {
+                //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
                 var phone = await phoneBookRepository.GetAsyncByPhoneNumber(phoneNumber);
                 return phone != null
                     ? Results.Ok(new PhoneDto
@@ -51,6 +54,7 @@ public static class BookEndpoints
 
         app.MapGet("getByPhoneName/{phoneName}", async (IPhoneBookRepository phoneBookRepository, string phoneName) =>
         {
+            //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
             var phone = await phoneBookRepository.GetAsyncByPhoneName(phoneName);
             return phone != null
                 ? Results.Ok(new PhoneDto
@@ -65,6 +69,7 @@ public static class BookEndpoints
 
         app.MapPost("create", async (IPhoneBookRepository phoneBookRepository, [FromBody] PhoneDto command) =>
         {
+            //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
             var newPhone = new PhoneBook(command.PhoneNumber, command.Name, command.Description);
             await phoneBookRepository.AddAsync(newPhone);
             return Results.Created();
@@ -72,6 +77,7 @@ public static class BookEndpoints
 
         app.MapPatch("update", async (IPhoneBookRepository phoneBookRepository, [FromBody] PhoneDto command) =>
         {
+            //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
             var phone = await phoneBookRepository.GetAsyncById(command.Id);
             if (phone == null)
             {
@@ -87,6 +93,7 @@ public static class BookEndpoints
 
         app.MapDelete("delete/{phoneId:guid}", async (IPhoneBookRepository phoneBookRepository, Guid phoneId) =>
         {
+            //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
             var phone = await phoneBookRepository.GetAsyncById(phoneId);
             if (phone == null)
             {
@@ -99,6 +106,7 @@ public static class BookEndpoints
 
         app.MapDelete("deleteMany", async (IPhoneBookRepository phoneBookRepository, IEnumerable<Guid> phoneIds) =>
         {
+            //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
             var phone = await phoneBookRepository.GetAllAsync();
             var phonesToDelete = phone
                 .Where(p =>

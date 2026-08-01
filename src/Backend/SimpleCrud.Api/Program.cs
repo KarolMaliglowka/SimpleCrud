@@ -1,28 +1,59 @@
+using CoreWCF;
+using CoreWCF.Configuration;
+using CoreWCF.Description;
 using SimpleCrud.Api;
+using SimpleCrud.Api.SOAP;
 using SimpleCrud.Application;
 using SimpleCrud.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular",
         policy =>
         {
-            policy.WithOrigins("http://localhost:4200") // adres Twojego Angulara
+            policy.WithOrigins("http://localhost:4200")
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
 });
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
 builder.Services.AddOpenApi();
+
+builder.Services.AddServiceModelServices();
+builder.Services.AddServiceModelMetadata();
+builder.Services.AddScoped<PhoneSoapService>();
+builder.Services.AddSingleton<IServiceBehavior, ServiceDebugBehavior>(provider =>
+{
+    return new ServiceDebugBehavior
+    {
+        IncludeExceptionDetailInFaults = true
+    };
+});
+
 builder.Services
     .AddInfrastructure(builder.Configuration)
     .AddApplication();
+
 var app = builder.Build();
-// Użyj CORS
+
+var serviceMetadataBehavior = app.Services
+    .GetRequiredService<ServiceMetadataBehavior>();
+
+serviceMetadataBehavior.HttpGetEnabled = true;
+
+app.UseServiceModel(serviceBuilder =>
+{
+    serviceBuilder.AddService<PhoneSoapService>();
+
+    serviceBuilder.AddServiceEndpoint<PhoneSoapService, IPhoneSoapContract>(
+        new BasicHttpBinding(),
+        "/PhoneService");
+});
+
 app.UseCors("AllowAngular");
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
