@@ -24,13 +24,6 @@ builder.Services.AddOpenApi();
 builder.Services.AddServiceModelServices();
 builder.Services.AddServiceModelMetadata();
 builder.Services.AddScoped<PhoneSoapService>();
-builder.Services.AddSingleton<IServiceBehavior, ServiceDebugBehavior>(provider =>
-{
-    return new ServiceDebugBehavior
-    {
-        IncludeExceptionDetailInFaults = true
-    };
-});
 
 builder.Services
     .AddInfrastructure(builder.Configuration)
