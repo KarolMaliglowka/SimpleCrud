@@ -6,6 +6,7 @@ namespace SimpleCrud.Application.Services;
 public interface IPhoneService
 {
     Task<List<PhoneDto>> GetAllPhones();
+    Task<PhoneDto?> GetById(Guid phoneId);
 }
 
 public class PhoneService : IPhoneService
@@ -31,4 +32,19 @@ public class PhoneService : IPhoneService
             })
         ];
     }
+
+    public async Task<PhoneDto?> GetById(Guid phoneId)
+    {
+        var phone = await _phoneBookRepository
+            .GetAsyncById(phoneId);
+        return phone != null
+            ? new PhoneDto
+            {
+                Id = phone.Id,
+                Name = phone.Name,
+                PhoneNumber = phone.PhoneNumber,
+                Description = phone.Description
+            } : null;
+    }
+    
 }

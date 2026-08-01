@@ -4,13 +4,13 @@ using SimpleCrud.Application.Services;
 using SimpleCrud.Core.Entities;
 using SimpleCrud.Core.Repositories;
 
-namespace SimpleCrud.Api;
+namespace SimpleCrud.Api.EndPoints;
 
 public static class PhoneEndpoints
 {
     public static void MapBookEndpoints(this WebApplication app)
     {
-        app.MapGet("", async (IPhoneBookRepository phoneBookRepository, IPhoneService phoneService) =>
+        app.MapGet("", async (IPhoneService phoneService) =>
         {
             var getAllAsync = await phoneService.GetAllPhones();
             return getAllAsync.Count != 0
@@ -18,19 +18,11 @@ public static class PhoneEndpoints
                 : Results.NotFound("No records in database :/");
         });
 
-        app.MapGet("getById/{phoneId:guid}", async (IPhoneBookRepository phoneBookRepository, Guid phoneId) =>
+        app.MapGet("getById/{phoneId:guid}", async (IPhoneService phoneService, Guid phoneId) =>
         {
-            //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
-            var phone = await phoneBookRepository
-                .GetAsyncById(phoneId);
+            var phone = await phoneService .GetById(phoneId);
             return phone != null
-                ? Results.Ok(new PhoneDto
-                {
-                    Id = phone.Id,
-                    Name = phone.Name,
-                    PhoneNumber = phone.PhoneNumber,
-                    Description = phone.Description
-                })
+                ? Results.Ok(phone)
                 : Results.NotFound("No record in database :/");
         });
 
