@@ -63,22 +63,26 @@
   </p-table>
 
   <p-dialog [(visible)]="phoneDialog" [style]="{ width: '450px' }" header="Product Details" [modal]="true">
-    <ng-template #content>
-      <div class="flex flex-col gap-6">
-            <div>
-          <label for="name" class="block font-bold mb-3">Name</label>
+    <ng-template>
+
+      <div >
+        <div class="flex items-center gap-4 mb-4">
+          <label for="name" class="font-semibold w-24 text-sm">Name</label>
           <input type="text" pInputText id="name" [(ngModel)]="phone.name" required autofocus fluid />
           <small class="text-red-500" *ngIf="submitted && !phone.name">Name is required.</small>
         </div>
-        <div>
-          <label for="phoneNumber" class="block font-bold mb-3">phoneNumber</label>
-          <textarea id="phoneNumber" pTextarea [(ngModel)]="phone.phoneNumber" required rows="3" cols="20" fluid></textarea>
+
+        <div class="flex items-center gap-4 mb-4">
+          <label for="phoneNumber" class="font-semibold w-24 text-sm">phoneNumber</label>
+          <input type="text" pInputText id="phoneNumber" [(ngModel)]="phone.phoneNumber" required autofocus fluid />
         </div>
-        <div>
-          <label for="description" class="block font-bold mb-3">description</label>
-          <textarea id="description" pTextarea [(ngModel)]="phone.description" required rows="3" cols="20" fluid></textarea>
+
+        <div class="flex items-center gap-4 mb-4">
+          <label for="description" class="font-semibold w-24 text-sm">description</label>
+          <input type="text" pInputText id="description" [(ngModel)]="phone.description"  autofocus fluid />
         </div>
       </div>
+
     </ng-template>
 
     <ng-template #footer>
