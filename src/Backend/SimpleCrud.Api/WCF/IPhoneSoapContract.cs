@@ -8,10 +8,25 @@ public interface IPhoneSoapContract
 {
     [OperationContract]
     Task<List<PhoneDto>>? GetPhones();
+    
     [OperationContract]
     Task<PhoneDto?> GetById(Guid phoneId);
+    
     [OperationContract]
     Task<PhoneDto?> GetByName(string phoneName);
+    
     [OperationContract]
     Task<PhoneDto?> GetByNumber(string phoneNumber);
+    
+    [OperationContract]
+    Task<Guid> AddPhone(PhoneDto command);
+    
+    [OperationContract]
+    Task UpdatePhone(PhoneDto? command);
+    
+    [OperationContract]
+    Task DeletePhone(Guid phoneId);
+    
+    [OperationContract]
+    Task DeleteManyPhones(List<Guid> phoneIds);
 }
