@@ -1,66 +1,47 @@
 ﻿using SimpleCrud.Application.Dtos;
 using SimpleCrud.Application.Services;
-using SimpleCrud.Core.Repositories;
 
 namespace SimpleCrud.Api.WCF;
 
-public class PhoneSoapService : IPhoneSoapContract
+public class PhoneSoapService(IPhoneService phoneService) : IPhoneSoapContract
 {
-    private readonly IPhoneBookRepository _phoneBookRepository;
-    private readonly IPhoneService  _phoneService;
-
-    public PhoneSoapService(IPhoneBookRepository phoneBookRepository, IPhoneService phoneService)
-    {
-        _phoneBookRepository = phoneBookRepository;
-        _phoneService = phoneService;
-    }
-
     public async Task<List<PhoneDto>>? GetPhones()
     {
-        return await _phoneService.GetAllPhones();
+        return await phoneService.GetAllPhones();
     }
 
     public async Task<PhoneDto?> GetById(Guid phoneId)
     {
-        //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
-        var phone = await _phoneBookRepository
-            .GetAsyncById(phoneId);
-        return phone != null
-            ? new PhoneDto
-            {
-                Id = phone.Id,
-                Name = phone.Name,
-                PhoneNumber = phone.PhoneNumber,
-                Description = phone.Description
-            } : null;
+        return await phoneService.GetById(phoneId);
     }
 
     public async Task<PhoneDto?> GetByName(string phoneName)
     {
-        //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
-        var phone = await _phoneBookRepository.GetAsyncByPhoneName(phoneName);
-        return phone != null
-            ? new PhoneDto
-            {
-                Id = phone.Id,
-                Name = phone.Name,
-                PhoneNumber = phone.PhoneNumber,
-                Description = phone.Description
-            } : null;
+        return await phoneService.GetByName(phoneName);
     }
 
     public async Task<PhoneDto?> GetByNumber(string phoneNumber)
     {
-        //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
-        var phone = await _phoneBookRepository.GetAsyncByPhoneNumber(phoneNumber);
-        return phone != null
-            ? new PhoneDto
-            {
-                Id = phone.Id,
-                Name = phone.Name,
-                PhoneNumber = phone.PhoneNumber,
-                Description = phone.Description
-            }
-            : null;
+        return await phoneService.GetByNumber(phoneNumber);
+    }
+    
+    public async Task<Guid> AddPhone(PhoneDto command)
+    {
+        return await phoneService.AddPhone(command);
+    }
+    
+    public async Task UpdatePhone(PhoneDto? command)
+    {
+        await phoneService.UpdatePhone(command);
+    }
+    
+    public async Task DeletePhone(Guid phoneId)
+    {
+        await phoneService.DeletePhone(phoneId);
+    }
+    
+    public async Task DeleteManyPhones(List<Guid> phoneIds)
+    {
+        await phoneService.DeleteManyPhones(phoneIds);
     }
 }
