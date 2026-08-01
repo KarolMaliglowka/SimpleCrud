@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SimpleCrud.Application.Dtos;
+using SimpleCrud.Application.Services;
 using SimpleCrud.Core.Entities;
 using SimpleCrud.Core.Repositories;
 
@@ -9,12 +10,9 @@ public static class PhoneEndpoints
 {
     public static void MapBookEndpoints(this WebApplication app)
     {
-        app.MapGet("", async (IPhoneBookRepository phoneBookRepository) =>
+        app.MapGet("", async (IPhoneBookRepository phoneBookRepository, IPhoneService phoneService) =>
         {
-            //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
-            var getAllAsync = (await phoneBookRepository.GetAllAsync())
-                .ToList();
-
+            var getAllAsync = await phoneService.GetAllPhones();
             return getAllAsync.Count != 0
                 ? Results.Ok(getAllAsync)
                 : Results.NotFound("No records in database :/");

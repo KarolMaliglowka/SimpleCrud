@@ -1,4 +1,5 @@
 ﻿using SimpleCrud.Application.Dtos;
+using SimpleCrud.Application.Services;
 using SimpleCrud.Core.Repositories;
 
 namespace SimpleCrud.Api.WCF;
@@ -6,26 +7,17 @@ namespace SimpleCrud.Api.WCF;
 public class PhoneSoapService : IPhoneSoapContract
 {
     private readonly IPhoneBookRepository _phoneBookRepository;
+    private readonly IPhoneService  _phoneService;
 
-    public PhoneSoapService(IPhoneBookRepository phoneBookRepository)
+    public PhoneSoapService(IPhoneBookRepository phoneBookRepository, IPhoneService phoneService)
     {
         _phoneBookRepository = phoneBookRepository;
+        _phoneService = phoneService;
     }
 
     public async Task<List<PhoneDto>>? GetPhones()
     {
-        //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
-        var getAllAsync = await _phoneBookRepository.GetAllAsync();
-        return
-        [
-            .. getAllAsync.Select(phone => new PhoneDto
-            {
-                Id = phone.Id,
-                Name = phone.Name,
-                PhoneNumber = phone.PhoneNumber,
-                Description = phone.Description
-            })
-        ];
+        return await _phoneService.GetAllPhones();
     }
 
     public async Task<PhoneDto?> GetById(Guid phoneId)
