@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SimpleCrud.Application.Dtos;
 using SimpleCrud.Application.Services;
-using SimpleCrud.Core.Entities;
-using SimpleCrud.Core.Repositories;
 
 namespace SimpleCrud.Api.EndPoints;
 
@@ -20,94 +18,50 @@ public static class PhoneEndpoints
 
         app.MapGet("getById/{phoneId:guid}", async (IPhoneService phoneService, Guid phoneId) =>
         {
-            var phone = await phoneService .GetById(phoneId);
+            var phone = await phoneService.GetById(phoneId);
             return phone != null
                 ? Results.Ok(phone)
                 : Results.NotFound("No record in database :/");
         });
 
         app.MapGet("getByPhoneNumber/{phoneNumber}",
-            async (IPhoneBookRepository phoneBookRepository, string phoneNumber) =>
+            async (IPhoneService phoneService, string phoneNumber) =>
             {
-                //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
-                var phone = await phoneBookRepository.GetAsyncByPhoneNumber(phoneNumber);
+                var phone = await phoneService.GetByNumber(phoneNumber);
                 return phone != null
-                    ? Results.Ok(new PhoneDto
-                    {
-                        Id = phone.Id,
-                        Name = phone.Name,
-                        PhoneNumber = phone.PhoneNumber,
-                        Description = phone.Description
-                    })
+                    ? Results.Ok(phone)
                     : Results.NotFound("No record in database :/");
             });
 
-        app.MapGet("getByPhoneName/{phoneName}", async (IPhoneBookRepository phoneBookRepository, string phoneName) =>
+        app.MapGet("getByPhoneName/{phoneName}", async (IPhoneService phoneService, string phoneName) =>
         {
-            //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
-            var phone = await phoneBookRepository.GetAsyncByPhoneName(phoneName);
+            var phone = await phoneService.GetByName(phoneName);
             return phone != null
-                ? Results.Ok(new PhoneDto
-                {
-                    Id = phone.Id,
-                    Name = phone.Name,
-                    PhoneNumber = phone.PhoneNumber,
-                    Description = phone.Description
-                })
+                ? Results.Ok(phone)
                 : Results.NotFound("No record in database :/");
         });
 
-        app.MapPost("create", async (IPhoneBookRepository phoneBookRepository, [FromBody] PhoneDto command) =>
+        app.MapPost("create", async (IPhoneService phoneService, [FromBody] PhoneDto command) =>
         {
-            //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
-            var newPhone = new PhoneBook(command.PhoneNumber, command.Name, command.Description);
-            await phoneBookRepository.AddAsync(newPhone);
-            return Results.Created();
+            var result = await phoneService.AddPhone(command);
+            return Results.Created($"getById/{result}", result);
         });
 
-        app.MapPatch("update", async (IPhoneBookRepository phoneBookRepository, [FromBody] PhoneDto command) =>
+        app.MapPatch("update", async (IPhoneService phoneService, [FromBody] PhoneDto command) =>
         {
-            //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
-            var phone = await phoneBookRepository.GetAsyncById(command.Id);
-            if (phone == null)
-            {
-                return Results.NotFound("No record in database :/");
-            }
-
-            phone.SetPhoneNumber(command.PhoneNumber);
-            phone.SetName(command.Name);
-            phone.SetDescription(command.Description);
-            await phoneBookRepository.Update(phone);
+            await phoneService.UpdatePhone(command);
             return Results.Ok();
         });
 
-        app.MapDelete("delete/{phoneId:guid}", async (IPhoneBookRepository phoneBookRepository, Guid phoneId) =>
+        app.MapDelete("delete/{phoneId:guid}", async (IPhoneService phoneService, Guid phoneId) =>
         {
-            //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
-            var phone = await phoneBookRepository.GetAsyncById(phoneId);
-            if (phone == null)
-            {
-                return Results.NotFound("No record in database :/");
-            }
-
-            await phoneBookRepository.Remove(phone);
+            await phoneService.DeletePhone(phoneId);
             return Results.Ok();
         });
 
-        app.MapDelete("deleteMany", async (IPhoneBookRepository phoneBookRepository, IEnumerable<Guid> phoneIds) =>
+        app.MapDelete("deleteMany", async (IPhoneService phoneService, IEnumerable<Guid> phoneIds) =>
         {
-            //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
-            var phone = await phoneBookRepository.GetAllAsync();
-            var phonesToDelete = phone
-                .Where(p =>
-                    phoneIds.Any(ids => ids == p.Id));
-            var phoneBooks = phonesToDelete.ToList();
-            if (phoneBooks.Count == 0)
-            {
-                return Results.NotFound("No records in database :/");
-            }
-
-            await phoneBookRepository.RemoveMany(phoneBooks);
+            await phoneService.DeleteManyPhones(phoneIds);
             return Results.Ok();
         });
     }
