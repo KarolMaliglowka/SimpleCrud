@@ -22,17 +22,7 @@ public class PhoneSoapService : IPhoneSoapContract
 
     public async Task<PhoneDto?> GetById(Guid phoneId)
     {
-        //przenieść do Services w Application i zmienić na wspólny kod REST i SOAP
-        var phone = await _phoneBookRepository
-            .GetAsyncById(phoneId);
-        return phone != null
-            ? new PhoneDto
-            {
-                Id = phone.Id,
-                Name = phone.Name,
-                PhoneNumber = phone.PhoneNumber,
-                Description = phone.Description
-            } : null;
+        return await _phoneService.GetById(phoneId);
     }
 
     public async Task<PhoneDto?> GetByName(string phoneName)

@@ -1,7 +1,7 @@
 using CoreWCF;
 using CoreWCF.Configuration;
 using CoreWCF.Description;
-using SimpleCrud.Api;
+using SimpleCrud.Api.EndPoints;
 using SimpleCrud.Api.WCF;
 using SimpleCrud.Application;
 using SimpleCrud.Infrastructure;
