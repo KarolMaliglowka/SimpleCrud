@@ -3,7 +3,6 @@ import { PhoneService } from './services/phone.service';
 import { Phone } from './models/phone.model';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { CommonModule } from '@angular/common';
-// PrimeNG
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -11,9 +10,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
-
 import { FormsModule } from '@angular/forms';
-//import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -21,10 +18,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: 'app.component.css',
   providers: [MessageService, ConfirmationService],
   imports: [
-    //HttpClientModule,
     FormsModule,
     CommonModule,
-    // 🔽 wszystkie używane moduły PrimeNG muszą tu być
     TableModule,
     ButtonModule,
     InputTextModule,
@@ -99,5 +94,7 @@ export class AppComponent implements OnInit {
       this.phoneDialog = false;
     }
   }
-  hideDialog(){}
+  hideDialog(){
+    this.phoneDialog = false;
+  }
 }
