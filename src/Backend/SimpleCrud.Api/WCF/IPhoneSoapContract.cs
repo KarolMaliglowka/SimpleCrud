@@ -1,7 +1,7 @@
 ﻿using CoreWCF;
 using SimpleCrud.Application.Dtos;
 
-namespace SimpleCrud.Api.SOAP;
+namespace SimpleCrud.Api.WCF;
 
 [ServiceContract]
 public interface IPhoneSoapContract

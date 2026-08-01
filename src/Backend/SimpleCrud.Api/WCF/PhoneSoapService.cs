@@ -1,7 +1,7 @@
 ﻿using SimpleCrud.Application.Dtos;
 using SimpleCrud.Core.Repositories;
 
-namespace SimpleCrud.Api.SOAP;
+namespace SimpleCrud.Api.WCF;
 
 public class PhoneSoapService : IPhoneSoapContract
 {
