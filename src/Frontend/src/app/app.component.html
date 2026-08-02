@@ -63,21 +63,21 @@
   </p-table>
 
   <p-dialog [(visible)]="phoneDialog" [style]="{ width: '450px' }" header="Product Details" [modal]="true">
-    <ng-template>
+    <ng-template #content>
 
-      <div >
-        <div class="flex items-center gap-4 mb-4">
-          <label for="name" class="font-semibold w-24 text-sm">Name</label>
+      <div>
+        <div class="flex gap-4 mb-4">
+          <label for="name" class="w-24 text-sm">Name</label>
           <input type="text" pInputText id="name" [(ngModel)]="phone.name" required autofocus fluid />
           <small class="text-red-500" *ngIf="submitted && !phone.name">Name is required.</small>
         </div>
 
-        <div class="flex items-center gap-4 mb-4">
+        <div class="flex gap-4 mb-4">
           <label for="phoneNumber" class="font-semibold w-24 text-sm">phoneNumber</label>
           <input type="text" pInputText id="phoneNumber" [(ngModel)]="phone.phoneNumber" required autofocus fluid />
         </div>
 
-        <div class="flex items-center gap-4 mb-4">
+        <div class="flex gap-4 mb-4">
           <label for="description" class="font-semibold w-24 text-sm">description</label>
           <input type="text" pInputText id="description" [(ngModel)]="phone.description"  autofocus fluid />
         </div>
